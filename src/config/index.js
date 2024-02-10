@@ -1,2 +1,2 @@
 export * from './app.js';
-export * from './mail';
+export * from './mail.js';
