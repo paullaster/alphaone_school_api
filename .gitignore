@@ -1,5 +1,7 @@
 # ENVIRONMENTS
 .env
+*.local
+*.production
 
 #modules
 node_modules/
