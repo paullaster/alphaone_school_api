@@ -4,7 +4,7 @@ import { mail } from '../../../config/index.js';
 const transporter = createTransport({
     host: mail.host,
     port: mail.port,
-    secure: mail.security,
+    // secure: mail.security,
     auth: {
         user: mail.username,
         pass: mail.password,
