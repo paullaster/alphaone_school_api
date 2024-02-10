@@ -1,5 +1,6 @@
 import express from 'express';
 import { application } from './config/index.js';
+import { router } from './routes/index.js';
 
 
 // APP INSTANCE
