@@ -5,3 +5,6 @@ const usersRouter = express.Router();
 
 
 usersRouter.route('/auth', usersAuth);
+
+
+export { usersRouter};
