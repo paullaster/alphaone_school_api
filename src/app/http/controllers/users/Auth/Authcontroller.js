@@ -1,5 +1,5 @@
 import EmailVerificationNotification from "../../../notifications/EmailVerificationNotification.js";
-import { application } from "../../../../../config";
+import { application } from "../../../../../config/index.js";
 
 class AuthController {
 
@@ -14,7 +14,9 @@ class AuthController {
     <p><a href=${application.weburl}>Confirm Email Address </a></p>
     `
     const notify = new EmailVerificationNotification(req.body.email, mailSubject, mailBody);
-    const mail = notify.via('viaEmail');
+    const mail = await notify.via('viaEmail');
+    res.send(mail);
+
    }
 };
 
