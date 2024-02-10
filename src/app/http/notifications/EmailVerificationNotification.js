@@ -10,9 +10,16 @@ class EmailVerificationNotification {
         this.body = body;
     }
     via(channel) {
+        const mailable = {
+            email: this.notifiable,
+            subject: this.subject,
+            html: this.body,
+        }
         switch(channel) {
             case 'viaEmail':
-                return new Notifications().sendEmail()
+                return new Notifications().sendEmail(mailable);
+            case 'viaSms':
+                return;
 
         }
     }
