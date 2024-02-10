@@ -9,11 +9,12 @@ class AuthController {
    async signup(req, res) {
     const mailSubject = "Email account verification";
     const mailBody = `
-    <p> Hellor, ${ req.body.email } </p>
+    <p> Hello, ${ req.body.email } </p>
     <p> Please click the link below to confirm your email</p>
     <p><a href=${application.weburl}>Confirm Email Address </a></p>
     `
     const notify = new EmailVerificationNotification(req.body.email, mailSubject, mailBody);
+    const mail = notify.via('viaEmail');
    }
 };
 
