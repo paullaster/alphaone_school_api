@@ -1,12 +1,13 @@
 import express from 'express';
 import { application } from './config/index.js';
-import { router } from './routes/index.js';
+import {route } from './app/http/providers/index.js'
 
 
 // APP INSTANCE
 const app = express();
 
 
+app.use(route)
 
 
 app.get('/', (req, res) => {
