@@ -1,3 +1,5 @@
+import EmailVerificationNotification from "../../../notifications/EmailVerificationNotification.js";
+
 class AuthController {
 
    login(req, res) {
