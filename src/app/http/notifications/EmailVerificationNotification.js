@@ -24,3 +24,5 @@ class EmailVerificationNotification {
         }
     }
 }
+
+export default EmailVerificationNotification;
