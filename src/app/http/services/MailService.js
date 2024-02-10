@@ -1,0 +1,8 @@
+import {createTransport } from 'nodemailer';
+import { mail } from '../../../config';
+
+const transporter = createTransport({
+    host: mail.host,
+    port: mail.port,
+    secure: mail.security
+})
