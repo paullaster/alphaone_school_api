@@ -1,4 +1,5 @@
 import express from 'express';
+import { application } from './config/index.js';
 
 
 // APP INSTANCE
@@ -11,9 +12,7 @@ app.get('/', (req, res) => {
     res.send("I am back home after a long time");
 });
 
-const port = 3000;
 
-
-app.listen(port, () => {
-    console.log("Server listening on port " + port)
+app.listen(application.port, () => {
+    console.log(`Server started. ${application.url}`)
 })
