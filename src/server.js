@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { application } from './config/index.js';
 import {route } from './app/http/providers/index.js';
 import { ApiResponder } from './app/http/middlewares/ApiResponder.js';
@@ -10,6 +11,7 @@ const app = express();
 
 // APP SETTINGS
 app.use(express.json());
+app.use(cors());
 
 app.use(ApiResponder);
 app.use(route)
