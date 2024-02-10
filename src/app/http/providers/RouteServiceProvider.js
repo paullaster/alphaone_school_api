@@ -1,4 +1,4 @@
-import { router } from "../../../routes";
+import { router } from "../../../routes/index.js";
 import express from 'express';
 
 const route = express.Router();
