@@ -1,0 +1,23 @@
+{
+  "name": "alphaone-apis",
+  "version": "1.0.0",
+  "description": "Alphaone school project apis",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch ./src/server.js",
+    "production": "node server.js",
+    "test": "test"
+  },
+  "keywords": [
+    "API",
+    "Node.js",
+    "School"
+  ],
+  "author": "paullaster okoth",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.0.0-beta.1",
+    "nodemailer": "^6.9.9"
+  }
+}
