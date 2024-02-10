@@ -1,7 +1,11 @@
 class ApiResponder {
     res = null;
-    constructor(res) {
-        this.res = res;
+    constructor(req, res, next) {
+        this.res = {
+            ...this,
+            ...res
+        };
+        next(req, res);
     }
     success(data = {}, statusCode = 200, message = 'Success') {
 try {
