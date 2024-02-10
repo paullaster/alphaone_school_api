@@ -28,7 +28,7 @@ class AuthController {
         const mail = await notify.via('viaEmail');
         res.ApiResponse.success(mail['messageId'], 200, `We sent an email to ${mail.accepted[0]}, Please verify the and complete signing up`);
         } catch (error) {
-          
+          res.ApiResponse.error(error);
         }
         
 
