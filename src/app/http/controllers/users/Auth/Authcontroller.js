@@ -4,7 +4,8 @@ class AuthController {
 
    };
    signup(req, res) {
-    console.log(req);
+    console.log(req.body)
+    res.send(req.body)
    }
 };
 

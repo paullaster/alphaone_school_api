@@ -4,7 +4,7 @@ import { usersAuth } from './auth.js';
 const usersRouter = express.Router();
 
 
-usersRouter.route('/auth', usersAuth);
+usersRouter.use('/auth', usersAuth);
 
 
 export { usersRouter};
