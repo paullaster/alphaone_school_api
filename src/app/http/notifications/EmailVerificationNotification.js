@@ -9,7 +9,7 @@ class EmailVerificationNotification {
         this.subject = subject;
         this.body = body;
     }
-    via(channel) {
+    async via(channel) {
         const mailable = {
             email: this.notifiable,
             subject: this.subject,
@@ -17,7 +17,7 @@ class EmailVerificationNotification {
         }
         switch(channel) {
             case 'viaEmail':
-                return new Notifications().sendEmail(mailable);
+                return await new Notifications().sendEmail(mailable);
             case 'viaSms':
                 return;
 

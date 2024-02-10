@@ -5,9 +5,7 @@ class AuthController {
    login(req, res) {
 
    };
-   signup(req, res) {
-    console.log(req.body)
-    res.send(req.body)
+   async signup(req, res) {
    }
 };
 
