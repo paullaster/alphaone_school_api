@@ -1,5 +1,5 @@
 import transporter from "../services/MailService.js";
-import { mail } from '../../../config';
+import { mail } from '../../../config/index.js';
 
 class Notifications {
     via(channel){}
