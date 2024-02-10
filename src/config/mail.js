@@ -4,4 +4,5 @@ export const mail = {
     username: process.env.MAIL_USERNAMME,
     password: process.env.MAIL_PASSWORD,
     security: process.env.MAIL_SECURITY,
+    from: process.env.MAIL_FROM,
 }

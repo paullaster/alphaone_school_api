@@ -9,4 +9,7 @@ const transporter = createTransport({
         user: mail.username,
         pass: mail.password,
     }
-})
+});
+
+export default transporter;
+
