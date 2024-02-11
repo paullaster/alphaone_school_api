@@ -6,4 +6,8 @@ export const database = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     timezone: process.env.TIME_ZONE,
+    pool: {
+        max: process.env.DB_POOL_CONNECTION_MAX
+    },
+    loggin: process.env.DB_LOGGING,
 }
