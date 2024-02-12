@@ -1,7 +1,8 @@
 import EmailVerificationNotification from "../../../notifications/EmailVerificationNotification.js";
 import { application } from "../../../../../config/index.js";
 import { User } from "../../../../models/User.js";
-import { bcrypt } from 'bcrypt';
+import pkg from 'bcrypt';
+const { bcrypt } = pkg;
 
 class AuthController {
 
@@ -42,6 +43,7 @@ class AuthController {
       bcrypt
       .genSalt(saltRounds)
       .the((salt) => {
+        console.log(salt);
         return bcrypt.hash(password, salt);
       })
       .then((hash) => {

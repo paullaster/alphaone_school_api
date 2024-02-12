@@ -7,7 +7,7 @@ export const database = {
     password: process.env.DB_PASSWORD,
     timezone: process.env.TIME_ZONE,
     pool: {
-        max: process.env.DB_POOL_CONNECTION_MAX
+        max: parseInt(process.env.DB_POOL_CONNECTION_MAX)
     },
     loggin: process.env.DB_LOGGING,
 }
