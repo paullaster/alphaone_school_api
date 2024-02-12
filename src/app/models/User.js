@@ -28,7 +28,6 @@ User.init({
         defaultValue: 'leaner',
     },
 
-
 }, {
     sequilize,
     timestamps: true,
