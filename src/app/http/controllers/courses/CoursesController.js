@@ -3,10 +3,12 @@ import { Course } from "../../../models/Course";
 class CoursesController {
     async listCourses(req, res) {
         try {
-            const courses = await Course.findAll({
+            const courses = await Course.findAndCountAll({
                 where: {
                     status: 'status',
-                }
+                },
+                // offset: 0,
+                // limit: 10,
             });
             res.ApiResponse.success(courses)
         } catch (error) {
