@@ -38,14 +38,14 @@ class CoursesController {
     }
     updateCourse(req, res) {
         try {
-            
+            //@TODO
         } catch (error) {
             
         }
     }
     deletecourse(req, res) {
         try {
-            
+            //@todo
         } catch (error) {
             
         }
