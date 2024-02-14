@@ -35,7 +35,7 @@ class AuthController {
         
 
     }
-  async createUser(req, res) {
+  async createUser(req, res, next) {
     try {
       const password = req.body.password;
       const saltRounds = 12;
@@ -48,10 +48,13 @@ class AuthController {
         delete req.body.password;
         let user = {
           ...req.body,
-          password: hash
+          password: hash,
         };
         user = await User.create(user);
-        user = delete user.password;
+        req.body.email = user.email;
+        req.body.password = password;
+        req.body.type = user.type;
+        next(req);
         res.ApiResponse.success(user, 201, `User created successfully!`);
       })
       .catch((error) => {
