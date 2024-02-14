@@ -51,6 +51,7 @@ class AuthController {
           password: hash
         };
         user = await User.create(user);
+        user = delete user.password;
         res.ApiResponse.success(user, 201, `User created successfully!`);
       })
       .catch((error) => {
