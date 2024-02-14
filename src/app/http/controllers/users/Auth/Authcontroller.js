@@ -18,7 +18,16 @@ class AuthController {
         }
         bcrypt.compare(req.body.password, user.password)
         .then((result) => {
+          if (!result) {
+            res.ApiResponse.error({email: user.email}, "Wrong password", 401);
+          }
+          const payload = {
+            email: user.email,
+            name:user.name,
+            type: user.type,
+          };
 
+          jwt.sign(payload, )
           res.ApiResponse.success(result);
         })
       } catch (error) {
