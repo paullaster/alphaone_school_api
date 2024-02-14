@@ -35,7 +35,6 @@ class AuthController {
             }
             res.ApiResponse.success({token}, 200, "Login successful!");
           });
-          res.ApiResponse.success(result);
         })
       } catch (error) {
         res.ApiResponse.error(error);
