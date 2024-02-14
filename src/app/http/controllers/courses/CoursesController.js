@@ -1,11 +1,16 @@
 import { Course } from "../../../models/Course";
 
 class CoursesController {
-    listCourses(req, res) {
+    async listCourses(req, res) {
         try {
-            const course = 
+            const courses = await Course.findAll({
+                where: {
+                    status: 'status',
+                }
+            });
+            res.ApiResponse.success(courses)
         } catch (error) {
-            
+            res.ApiResponse.error(error, 'Error loading courses!');
         }
     }
     createCourse(req, res) {
@@ -37,3 +42,5 @@ class CoursesController {
         }
     }
 }
+
+export default new CoursesController();
