@@ -29,7 +29,12 @@ class AuthController {
             iat: Math.floor(Date.now() / 1000) + (60 * 60)
           };
 
-          jwt.sign(payload, application.key, {algorithm: 'RS512'});
+          jwt.sign(payload, application.key, {algorithm: 'RS512'}, (error, token) => {
+            if(error) {
+              res.ApiResponse.error(null, "We couldn't log you inn!", 500);
+            }
+            res.ApiResponse.success({token}, 200, "Login successful!");
+          });
           res.ApiResponse.success(result);
         })
       } catch (error) {
