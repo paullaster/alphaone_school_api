@@ -16,11 +16,11 @@ class AuthController {
           res.ApiResponse.error(user, "User matching this email does not exist!", 422);
         }
         bcrypt.compare(req.body.password, user.password)
-        then((result) => {
+        .then((result) => {
           res.ApiResponse.success(result);
         })
       } catch (error) {
-        
+        res.ApiResponse.error(error);
       }
     };
     async signup(req, res) {
