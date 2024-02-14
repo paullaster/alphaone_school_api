@@ -18,7 +18,7 @@ class CoursesController {
             const course = await Course.create(req,body);
             res.ApiResponse.success(course, 201, `${course.name} course create successfully!`);
         } catch (error) {
-            
+            res.ApiResponse.error(error, 'We ran into an error when creating this course!');
         }
     }
     findCourse(req, res) {
