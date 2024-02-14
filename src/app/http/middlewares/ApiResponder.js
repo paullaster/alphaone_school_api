@@ -8,8 +8,7 @@ export const  ApiResponder = (req, res, next) => {
             }
         },
         error(data = {}, message = "Error", statusCode = 500) {
-            // .send({ data, message, statusCode })
-            res.sendStatus(500).send("Error message");
+            res.sendStatus(500).json({ data, message, statusCode });
         }
 
     };
