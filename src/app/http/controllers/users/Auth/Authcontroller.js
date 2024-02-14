@@ -5,8 +5,23 @@ import bcrypt from 'bcrypt';
 
 class AuthController {
 
-    login(req, res) {
-
+    async login(req, res) {
+      try {
+        const user = await User.findOne({
+          where: {
+            email: req.body.email
+          }
+        });
+        if (!user) {
+          res.ApiResponse.error(user, "User matching this email does not exist!", 422);
+        }
+        bcrypt.compare(req.body.password, user.password)
+        then((result) => {
+          res.ApiResponse.success(result);
+        })
+      } catch (error) {
+        
+      }
     };
     async signup(req, res) {
         try {
