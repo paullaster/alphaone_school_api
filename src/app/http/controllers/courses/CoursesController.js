@@ -13,9 +13,10 @@ class CoursesController {
             res.ApiResponse.error(error, 'Error loading courses!');
         }
     }
-    createCourse(req, res) {
+    async createCourse(req, res) {
         try {
-            
+            const course = await Course.create(req,body);
+            res.ApiResponse.success(course, 201, `${course.name} course create successfully!`);
         } catch (error) {
             
         }
