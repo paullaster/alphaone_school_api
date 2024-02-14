@@ -1,8 +1,7 @@
 import EmailVerificationNotification from "../../../notifications/EmailVerificationNotification.js";
 import { application } from "../../../../../config/index.js";
 import { User } from "../../../../models/User.js";
-import pkg from 'bcrypt';
-const { bcrypt } = pkg;
+import bcrypt from 'bcrypt';
 
 class AuthController {
 
@@ -42,17 +41,16 @@ class AuthController {
       const saltRounds = 12;
       bcrypt
       .genSalt(saltRounds)
-      .the((salt) => {
-        console.log(salt);
+      .then((salt) => {
         return bcrypt.hash(password, salt);
       })
-      .then((hash) => {
+      .then(async (hash) => {
         delete req.body.password;
         let user = {
           ...req.body,
           password: hash
         };
-        user = User.create(user);
+        user = await User.create(user);
         res.ApiResponse.success(user, 201, `User created successfully!`);
       })
       .catch((error) => {
@@ -60,6 +58,8 @@ class AuthController {
       })
 
     } catch (error) {
+      console.log("Log error", error);
+
       res.ApiResponse.error(error);
     }
   }
