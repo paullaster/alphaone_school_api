@@ -2,6 +2,7 @@ import EmailVerificationNotification from "../../../notifications/EmailVerificat
 import { application } from "../../../../../config/index.js";
 import { User } from "../../../../models/User.js";
 import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
 
 class AuthController {
 
@@ -17,6 +18,7 @@ class AuthController {
         }
         bcrypt.compare(req.body.password, user.password)
         .then((result) => {
+
           res.ApiResponse.success(result);
         })
       } catch (error) {
