@@ -25,6 +25,10 @@ const Course = sequilize.define('Course', {
         type: DataTypes.STRING,
         values: ['Active', 'Suspended'],
         allowNull: false,
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull:false,
     }
 });
 
