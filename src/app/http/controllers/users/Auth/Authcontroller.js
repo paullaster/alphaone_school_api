@@ -51,10 +51,7 @@ class AuthController {
           password: hash,
         };
         user = await User.create(user);
-        req.body.email = user.email;
-        req.body.password = password;
-        req.body.type = user.type;
-        next(req);
+        user.password = new Buffer(password).toString('base64');
         res.ApiResponse.success(user, 201, `User created successfully!`);
       })
       .catch((error) => {
