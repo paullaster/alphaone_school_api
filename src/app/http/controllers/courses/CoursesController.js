@@ -7,8 +7,8 @@ class CoursesController {
                 where: {
                     status: 'status',
                 },
-                // offset: 0,
-                // limit: 10,
+                offset: 0,
+                limit: 0,
             });
             res.ApiResponse.success(courses)
         } catch (error) {
