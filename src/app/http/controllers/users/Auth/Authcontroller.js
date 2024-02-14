@@ -3,7 +3,6 @@ import { application } from "../../../../../config/index.js";
 import { User } from "../../../../models/User.js";
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
-import { application } from "../../../../../config/index.js";
 
 class AuthController {
 
@@ -29,9 +28,9 @@ class AuthController {
             iat: Math.floor(Date.now() / 1000) + (60 * 60)
           };
 
-          jwt.sign(payload, application.key, {algorithm: 'RS512'}, (error, token) => {
+          jwt.sign(payload, application.key, {algorithm: 'HS512'}, (error, token) => {
             if(error) {
-              res.ApiResponse.error(null, "We couldn't log you inn!", 500);
+              res.ApiResponse.error(error, "We couldn't log you inn!", 500);
             }
             res.ApiResponse.success({token}, 200, "Login successful!");
           });
