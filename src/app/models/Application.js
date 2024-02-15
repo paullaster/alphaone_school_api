@@ -5,9 +5,10 @@ import { User } from "./User.js";
 
 const Application = sequilize.define('Application', {
     id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         unique: true,
+        autoIncrement: true,
     },
     course: {
         type: DataTypes.STRING,
