@@ -41,8 +41,15 @@ class AuthController {
   };
   async signup(req, res) {
     try {
-      const user = User.findAll();
-      res.json(user);
+      const user = await User.findOne({
+        where: {
+          email: req.body.email,
+        }
+      });
+
+      if (user) {
+        req.ApiResponse.error({email: user.email}, `User ${user.email} already exist!`, 400);
+      };
       const url = `${application.weburl}/getstarted/confirm/${new Buffer(req.body.email).toString('base64')}`
       const mailSubject = "Email account verification";
       const mailBody = `
