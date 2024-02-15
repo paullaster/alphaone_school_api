@@ -54,6 +54,7 @@ class ApplicationController {
                     id: req.body.applicationID,
                 },
             });
+            
         } catch (error) {
             
         }
