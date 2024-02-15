@@ -56,7 +56,7 @@ class ApplicationController {
             });
             res.ApiResponse.success(app, 200);   
         } catch (error) {
-            
+            req.ApiResponse.error(error, 'We ran into an error while getting this application!');
         }
     }
 }
