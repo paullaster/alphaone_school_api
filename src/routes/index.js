@@ -6,5 +6,6 @@ const router = express.Router();
 
 
 router.use('/users', usersRouter);
+router.use(useCou)
 // router.use('/admin', );
 export {router};
