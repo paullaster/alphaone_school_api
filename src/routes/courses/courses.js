@@ -1,5 +1,5 @@
 import express from "express";
-import CoursesController from "../../app/http/controllers/courses/CoursesController";
+import CoursesController from "../../app/http/controllers/courses/CoursesController.js";
 const coursesRoutes = express.Router();
 
 coursesRoutes.get('/', CoursesController.listCourses);

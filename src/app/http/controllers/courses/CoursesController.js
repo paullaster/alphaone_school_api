@@ -1,4 +1,4 @@
-import { Course } from "../../../models/Course";
+import { Course } from "../../../models/Course.js";
 
 class CoursesController {
     async listCourses(req, res) {

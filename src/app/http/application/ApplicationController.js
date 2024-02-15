@@ -1,4 +1,4 @@
-import { Application } from "../../models/Application";
+import { Application } from "../../../models/Application.js";
 
 class ApplicationController {
     async apply(req, res) {
