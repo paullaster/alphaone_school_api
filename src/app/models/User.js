@@ -22,9 +22,9 @@ const User = sequilize.define('User',
             unique: true,
         },
         type: {
-            type: DataTypes.ENUM('leaner', 'admin'),
+            type: DataTypes.ENUM('learner', 'admin'),
             allowNull: false,
-            defaultValue: 'leaner',
+            defaultValue: 'learner',
         },
 
     }
