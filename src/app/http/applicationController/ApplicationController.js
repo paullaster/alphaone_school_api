@@ -35,4 +35,16 @@ class ApplicationController {
             req.ApiResponse.error(error, 'Error updating application');
         }
     }
+    async deleteApplication(req, res) {
+        try {
+            const application = await findByPk(req.body.id);
+            if (!application) {
+                res.ApiResponse.error(application, 'Application not found', 404);
+            }
+            const deleted = await application.destroy();
+            res.ApiResponse.success(deleted, 202, "Deleted successfully");
+        } catch (error) {
+            req.ApiResponse.error(error, "failed to delete the application");
+        }
+    }
 }
