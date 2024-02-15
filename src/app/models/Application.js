@@ -29,5 +29,10 @@ const Application = sequilize.define('Application', {
         type: DataTypes.STRING,
         values: ['Pending', 'Paid'],
         allowNull: false,
+    },
+    status: {
+        type: DataTypes.STRING,
+        values: ['New', 'In progress', 'Completed'],
+        allowNull: false,
     }
 })
