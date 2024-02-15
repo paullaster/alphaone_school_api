@@ -92,7 +92,7 @@ class AuthController {
             password: hash,
           };
           user = await User.create(user);
-          user.password = new Buffer(password).toString('base64');
+          user.password = new Buffer.from(password).toString('base64');
           res.ApiResponse.success(user, 201, `User created successfully!`);
         })
         .catch((error) => {
