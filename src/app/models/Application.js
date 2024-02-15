@@ -35,4 +35,8 @@ const Application = sequilize.define('Application', {
         values: ['New', 'In progress', 'Completed'],
         allowNull: false,
     }
-})
+});
+
+Application.sync();
+
+export { Application };
