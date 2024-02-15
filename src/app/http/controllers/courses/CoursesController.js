@@ -53,9 +53,14 @@ class CoursesController {
             requestAnimationFrame.ApiResponse.error(error, "Erro updating this course");
         }
     }
-    deletecourse(req, res) {
+    async deletecourse(req, res) {
         try {
-            //@todo
+            const item = await Course.findByPk(req.body.courseID);
+            if (!item) {
+                res.ApiResponse.error(item, "We can not find this course", 404);
+            }
+            const isDeleted = await item.destroy();
+            
         } catch (error) {
             
         }
