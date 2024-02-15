@@ -47,4 +47,15 @@ class ApplicationController {
             req.ApiResponse.error(error, "failed to delete the application");
         }
     }
+    async application (req, res) {
+        try {
+            const app = await Application.findOne({
+                where: {
+                    id: req.body.applicationID,
+                },
+            });
+        } catch (error) {
+            
+        }
+    }
 }
