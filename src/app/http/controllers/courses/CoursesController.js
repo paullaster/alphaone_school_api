@@ -41,7 +41,9 @@ class CoursesController {
     async updateCourse(req, res) {
         try {
             const course = await Course.findByPk(req.body.courseID);
-            
+            if (!course) {
+                res.ApiResponse.error(course, 'We can find this course', 404);
+            }
         } catch (error) {
             
         }
