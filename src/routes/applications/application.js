@@ -1,5 +1,5 @@
 import express from 'express';
-import ApplicationController from '../../app/http/controllers/application/ApplicationController';
+import ApplicationController from '../../app/http/controllers/application/ApplicationController.js';
 const applicationRoutes = express.Router();
 
 applicationRoutes.get('/', ApplicationController.applications);
