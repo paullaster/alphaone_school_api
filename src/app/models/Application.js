@@ -22,7 +22,12 @@ const Application = sequilize.define('Application', {
         allowNull: false,
         references: {
             model: User,
-            key: 'id'
-        }
+            key: 'id', 
+        },
+    },
+    payment: {
+        type: DataTypes.STRING,
+        values: ['Pending', 'Paid'],
+        allowNull: false,
     }
 })
