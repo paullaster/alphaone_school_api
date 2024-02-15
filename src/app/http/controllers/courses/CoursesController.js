@@ -44,6 +44,9 @@ class CoursesController {
             if (!course) {
                 res.ApiResponse.error(course, 'We can find this course', 404);
             }
+            for (prop in req.body) {
+                course[prop] = req.body[prop];
+            }
         } catch (error) {
             
         }
