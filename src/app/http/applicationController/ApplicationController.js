@@ -9,4 +9,12 @@ class ApplicationController {
             res.ApiResponse.error(error, 'Error creating application');
         }
     }
+    async applications (req, res) {
+        try {
+            const applications = await Application.findAndCountAll({});
+            res.ApiResponse.success(applications, 200);
+        } catch (error) {
+            
+        }
+    }
 }
