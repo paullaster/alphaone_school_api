@@ -14,7 +14,7 @@ class ApplicationController {
             const applications = await Application.findAndCountAll({});
             res.ApiResponse.success(applications, 200);
         } catch (error) {
-            
+            res.ApiResponse.error(error);
         }
     }
 }
