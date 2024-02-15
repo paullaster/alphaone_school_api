@@ -54,6 +54,9 @@ class ApplicationController {
                     id: req.body.applicationID,
                 },
             });
+            if(!app) {
+                res.ApiResponse.error(app, 'We can not find this application', 404);
+            }
             res.ApiResponse.success(app, 200);   
         } catch (error) {
             req.ApiResponse.error(error, 'We ran into an error while getting this application!');
