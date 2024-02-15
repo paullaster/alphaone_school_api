@@ -1,2 +1,7 @@
 import express from 'express';
-const application = express.Router();
+const useApplicationRoutes = express.Router();
+
+
+
+
+export { useApplicationRoutes };
