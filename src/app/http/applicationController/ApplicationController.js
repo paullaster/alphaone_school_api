@@ -24,6 +24,9 @@ class ApplicationController {
                     id: req.body.applicationID,
                 }
             });
+            if (!application) {
+                res.ApiResponse.error(application, 'We can find ths application', 404);
+            }
             for (let prop in req.body) {
                 if (prop !== 'applicationID') {
                     application[prop] = req.body[prop];

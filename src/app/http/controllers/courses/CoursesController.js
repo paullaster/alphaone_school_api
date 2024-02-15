@@ -38,9 +38,10 @@ class CoursesController {
             res.ApiResponse.error(error, 'Error fetching this course');
         }
     }
-    updateCourse(req, res) {
+    async updateCourse(req, res) {
         try {
-            //@TODO
+            const course = await Course.findByPk(req.body.courseID);
+            
         } catch (error) {
             
         }
