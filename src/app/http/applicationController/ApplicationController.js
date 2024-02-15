@@ -32,7 +32,7 @@ class ApplicationController {
             const updatedApplication = await application.save();
             res.ApiResponse.success(updatedApplication, 201, "Application updated");
         } catch (error) {
-
+            req.ApiResponse.error(error, 'Error updating application');
         }
     }
 }
