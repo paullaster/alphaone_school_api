@@ -13,6 +13,7 @@ const Application = sequilize.define('Application', {
         references: {
             model: Course,
             key: 'id',
-        }
+        },
+        allowNull: false
     }
 })
