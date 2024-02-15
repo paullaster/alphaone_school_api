@@ -62,7 +62,7 @@ class CoursesController {
             const isDeleted = await item.destroy();
             res.ApiResponse.success(isDeleted, 202, 'Course deleted');
         } catch (error) {
-            
+            res.ApiResponse.error(error, "Error deleting course");
         }
     }
 }
