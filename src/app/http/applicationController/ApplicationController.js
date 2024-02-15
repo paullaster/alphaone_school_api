@@ -63,3 +63,5 @@ class ApplicationController {
         }
     }
 }
+
+export default new ApplicationController();
