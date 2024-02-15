@@ -22,6 +22,7 @@ class AuthController {
             res.ApiResponse.error({ email: user.email }, "Wrong password", 401);
           }
           const payload = {
+            id: user.id,
             email: user.email,
             name: user.name,
             type: user.type,
