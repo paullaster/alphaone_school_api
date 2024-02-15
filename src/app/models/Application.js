@@ -22,7 +22,7 @@ const Application = sequilize.define('Application', {
         allowNull: false,
         references: {
             model: User,
-            key: ''
+            key: 'id'
         }
     }
 })
