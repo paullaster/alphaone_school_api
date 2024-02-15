@@ -5,7 +5,7 @@ class CoursesController {
         try {
             const courses = await Course.findAndCountAll({
                 where: {
-                    status: 'status',
+                    status: 'Active',
                 },
                 offset: 0,
                 limit: 0,

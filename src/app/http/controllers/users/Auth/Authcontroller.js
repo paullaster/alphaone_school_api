@@ -6,44 +6,46 @@ import jwt from "jsonwebtoken";
 
 class AuthController {
 
-    async login(req, res) {
-      try {
-        const user = await User.findOne({
-          where: {
-            email: req.body.email
-          }
-        });
-        if (!user) {
-          res.ApiResponse.error(user, "User matching this email does not exist!", 422);
+  async login(req, res) {
+    try {
+      const user = await User.findOne({
+        where: {
+          email: req.body.email
         }
-        bcrypt.compare(req.body.password, user.password)
+      });
+      if (!user) {
+        res.ApiResponse.error(user, "User matching this email does not exist!", 422);
+      }
+      bcrypt.compare(req.body.password, user.password)
         .then((result) => {
           if (!result) {
-            res.ApiResponse.error({email: user.email}, "Wrong password", 401);
+            res.ApiResponse.error({ email: user.email }, "Wrong password", 401);
           }
           const payload = {
             email: user.email,
-            name:user.name,
+            name: user.name,
             type: user.type,
             iat: Math.floor(Date.now() / 1000) + (60 * 60)
           };
 
-          jwt.sign(payload, application.key, {algorithm: 'HS512'}, (error, token) => {
-            if(error) {
+          jwt.sign(payload, application.key, { algorithm: 'HS512' }, (error, token) => {
+            if (error) {
               res.ApiResponse.error(error, "We couldn't log you inn!", 500);
             }
-            res.ApiResponse.success({token}, 200, "Login successful!");
+            res.ApiResponse.success({ token }, 200, "Login successful!");
           });
         })
-      } catch (error) {
-        res.ApiResponse.error(error);
-      }
-    };
-    async signup(req, res) {
-        try {
-          const url = `${application.weburl}/getstarted/confirm/${new Buffer(req.body.email).toString('base64')}`
-        const mailSubject = "Email account verification";
-        const mailBody = `
+    } catch (error) {
+      res.ApiResponse.error(error);
+    }
+  };
+  async signup(req, res) {
+    try {
+      const user = User.findAll();
+      res.json(user);
+      const url = `${application.weburl}/getstarted/confirm/${new Buffer(req.body.email).toString('base64')}`
+      const mailSubject = "Email account verification";
+      const mailBody = `
                   <p style="font-family: sans-serif; font-size: 16px; line-height: 1.5; margin: 0 0 20px; color: #333">
                   Hello, ${req.body.email}
                 </p>
@@ -57,37 +59,37 @@ class AuthController {
                   You can also copy and paste this link into a new browser tab: <a href="${url}" style="color: #999; text-decoration: none;">${url}</a>
                 </p>
     `;
-        const notify = new EmailVerificationNotification(req.body.email, mailSubject, mailBody);
-        const mail = await notify.via('viaEmail');
-        res.ApiResponse.success(mail['messageId'], 200, `We sent an email to ${mail.accepted[0]}, Please verify the and complete signing up`);
-        } catch (error) {
-          res.ApiResponse.error(error);
-        }
-        
-
+      const notify = new EmailVerificationNotification(req.body.email, mailSubject, mailBody);
+      const mail = await notify.via('viaEmail');
+      res.ApiResponse.success(mail['messageId'], 200, `We sent an email to ${mail.accepted[0]}, Please verify the and complete signing up`);
+    } catch (error) {
+      res.ApiResponse.error(error);
     }
+
+
+  }
   async createUser(req, res, next) {
     try {
       const password = req.body.password;
       const saltRounds = 12;
       bcrypt
-      .genSalt(saltRounds)
-      .then((salt) => {
-        return bcrypt.hash(password, salt);
-      })
-      .then(async (hash) => {
-        delete req.body.password;
-        let user = {
-          ...req.body,
-          password: hash,
-        };
-        user = await User.create(user);
-        user.password = new Buffer(password).toString('base64');
-        res.ApiResponse.success(user, 201, `User created successfully!`);
-      })
-      .catch((error) => {
-        res.ApiResponse.error(error);
-      })
+        .genSalt(saltRounds)
+        .then((salt) => {
+          return bcrypt.hash(password, salt);
+        })
+        .then(async (hash) => {
+          delete req.body.password;
+          let user = {
+            ...req.body,
+            password: hash,
+          };
+          user = await User.create(user);
+          user.password = new Buffer(password).toString('base64');
+          res.ApiResponse.success(user, 201, `User created successfully!`);
+        })
+        .catch((error) => {
+          res.ApiResponse.error(error);
+        })
 
     } catch (error) {
       console.log("Log error", error);
