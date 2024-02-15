@@ -4,5 +4,7 @@ const applicationRoutes = express.Router();
 
 applicationRoutes.get('/', ApplicationController.applications);
 applicationRoutes.get('/single', ApplicationController.application);
+applicationRoutes.post('/apply', ApplicationController.apply);
+
 
 export {  applicationRoutes };
