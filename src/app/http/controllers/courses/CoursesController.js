@@ -50,7 +50,7 @@ class CoursesController {
             const updatedCourse = await course.save();
             res.ApiResponse.success(updatedCourse, 201, "Updated successfully");
         } catch (error) {
-            
+            requestAnimationFrame.ApiResponse.error(error, "Erro updating this course");
         }
     }
     deletecourse(req, res) {
