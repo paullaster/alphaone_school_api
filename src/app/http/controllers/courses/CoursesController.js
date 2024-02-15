@@ -60,7 +60,7 @@ class CoursesController {
                 res.ApiResponse.error(item, "We can not find this course", 404);
             }
             const isDeleted = await item.destroy();
-            
+            res.ApiResponse.success(isDeleted, 202, 'Course deleted');
         } catch (error) {
             
         }
