@@ -1,5 +1,6 @@
 import { Course } from "../../../models/Course.js";
 import { Image } from "../../../models/Image.js";
+import Jimp from "jimp";
 
 class CoursesController {
     async listCourses(req, res) {
@@ -18,6 +19,17 @@ class CoursesController {
     }
     async createCourse(req, res) {
         try {
+            const image = req.body.image;
+            const ImageBuffer = Buffer.from(image, 'base64');
+            Jimp.read(ImageBuffer)
+            .then((result) => {
+                return result.resize(180, 180)
+                .quality(50)
+                .write(`/storage/public/${req.body.id}.png`);
+            })
+            .catch((error) => {
+                res.ApiResponse.error(error);
+            });
             const course = await Course.create(req,body);
             res.ApiResponse.success(course, 201, `${course.name} course create successfully!`);
         } catch (error) {
