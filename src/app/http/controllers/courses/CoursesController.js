@@ -39,6 +39,7 @@ class CoursesController {
                 url,
                 sourceID,
             };
+            await Image.create(imageEntry);
             const course = await Course.create(req,body);
             res.ApiResponse.success(course, 201, `${course.name} course create successfully!`);
         } catch (error) {
