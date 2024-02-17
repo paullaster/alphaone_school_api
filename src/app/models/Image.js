@@ -11,9 +11,6 @@ const Image = sequilize.define('Image', {
     sourceID: {
         type: DataTypes.STRING,
         allowNull: false,
-        references: {
-            model: 
-        }
     }
 });
 
