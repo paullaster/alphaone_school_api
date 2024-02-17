@@ -7,6 +7,7 @@ const Image = sequilize.define('Image', {
         autoIncrement: true,
         allowNull: false,
         unique: true,
+        primaryKey: true,
     },
     sourceID: {
         type: DataTypes.STRING,

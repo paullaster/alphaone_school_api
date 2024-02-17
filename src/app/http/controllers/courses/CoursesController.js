@@ -26,7 +26,7 @@ class CoursesController {
             Jimp.read(ImageBuffer)
             .then((result) => {
                 url = `${application.url}/storage/public/${req.body.id}.png`;
-                return result.resize(180, 180)
+                result.resize(180, 180)
                 .quality(50)
                 .write(`/storage/public/${req.body.id}.png`);
 
