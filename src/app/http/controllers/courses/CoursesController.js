@@ -20,6 +20,7 @@ class CoursesController {
     async createCourse(req, res) {
         try {
             const image = req.body.image;
+            let url = '';
             const ImageBuffer = Buffer.from(image, 'base64');
             Jimp.read(ImageBuffer)
             .then((result) => {
