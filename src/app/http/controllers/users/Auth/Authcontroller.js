@@ -51,7 +51,7 @@ class AuthController {
       if (user) {
         req.ApiResponse.error({email: user.email}, `User ${user.email} already exist!`, 400);
       };
-      const url = `${application.weburl}/getstarted/confirm/${new Buffer(req.body.email).toString('base64')}`
+      const url = `${application.weburl}/getstarted/confirm/${new Buffer.from(req.body.email).toString('base64')}`
       const mailSubject = "Email account verification";
       const mailBody = `
                   <p style="font-family: sans-serif; font-size: 16px; line-height: 1.5; margin: 0 0 20px; color: #333">
