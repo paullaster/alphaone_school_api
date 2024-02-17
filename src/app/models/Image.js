@@ -5,8 +5,15 @@ const Image = sequilize.define('Image', {
     entryNo: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        allowNull: true,
+        allowNull: false,
         unique: true,
+    },
+    sourceID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        references: {
+            model: 
+        }
     }
 });
 
