@@ -25,10 +25,10 @@ class CoursesController {
             const ImageBuffer = Buffer.from(image, 'base64');
             Jimp.read(ImageBuffer)
             .then((result) => {
-                url = `${application.url}/storage/public/${req.body.id}.png`;
+                url = `${application.url}/storage/public/images/${req.body.id}.png`;
                 result.resize(180, 180)
                 .quality(50)
-                .write(`/storage/public/${req.body.id}.png`);
+                .write(`/storage/public/images/${req.body.id}.png`);
 
             })
             .catch((error) => {
