@@ -16,9 +16,10 @@ class ImageController {
     }
     async getImage (req, res) {
         try {
+            const query = req.query;
             const image = await Image.findOne({
                 wehere: {
-                    sourceID: req.body.recordID,
+                    ...query,
                 },
             });
             if (!image) {
