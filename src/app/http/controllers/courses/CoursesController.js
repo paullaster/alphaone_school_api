@@ -21,6 +21,7 @@ class CoursesController {
     async createCourse(req, res) {
         try {
             const {image, ...courseData} = req.body;
+            const course = await Course.create(courseData);
             let url = `${application.url}/storage/public/images/${req.body.id}.png`;
             const ImageBuffer = Buffer.from(image, 'base64');
             Jimp.read(ImageBuffer)
@@ -37,10 +38,9 @@ class CoursesController {
             const imageEntry = {
                 url,
                 sourceID,
-                documentType: 'Course'
+                documentType: 'Course',
             };
             await Image.create(imageEntry);
-            const course = await Course.create(courseData);
             res.ApiResponse.success(course, 201, `${course.name} course create successfully!`);
         } catch (error) {
             res.ApiResponse.error(error, 'We ran into an error when creating this course!');
