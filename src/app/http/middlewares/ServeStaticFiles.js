@@ -6,3 +6,5 @@ const staticFiles = express.Router();
 staticFiles.get('/storage/*', (req, res) => {
 
 });
+
+export { staticFiles };
