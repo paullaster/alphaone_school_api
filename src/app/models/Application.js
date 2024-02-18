@@ -35,6 +35,10 @@ const Application = sequilize.define('Application', {
         type: DataTypes.STRING,
         values: ['New', 'In progress', 'Completed'],
         allowNull: false,
+    },
+    gender: {
+        type: DataTypes.STRING,
+        values: ['Male', 'Female', 'Prefer not to say']
     }
 });
 
