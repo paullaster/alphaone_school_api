@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(ApiResponder);
+app.use(express.static(`${__dirname}/storage`));
 
 app.use(route)
 
