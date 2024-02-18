@@ -14,6 +14,10 @@ app.use(express.json());
 app.use(cors());
 
 app.use(ApiResponder);
+app.get('/storage', (req,res) => {
+ res.send('file');
+});
+
 app.use(route)
 
 
