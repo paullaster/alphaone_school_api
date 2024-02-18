@@ -16,6 +16,10 @@ const Image = sequilize.define('Image', {
     url: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    documentType: {
+        type: DataTypes.STRING,
+        allowNull: false,
     }
 });
 

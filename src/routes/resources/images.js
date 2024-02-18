@@ -3,7 +3,7 @@ import ImagesController from "../../app/http/controllers/assets/ImagesController
 
 const imageRoutes = express.Router();
 
-coursesRoutes.get('/', ImagesController.getImages);
-coursesRoutes.get('/image', ImagesController.getImage);
+imageRoutes.get('/', ImagesController.getImages);
+imageRoutes.get('/image', ImagesController.getImage);
 
 export { imageRoutes };
