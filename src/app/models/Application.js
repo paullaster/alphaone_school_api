@@ -38,7 +38,16 @@ const Application = sequilize.define('Application', {
     },
     gender: {
         type: DataTypes.STRING,
-        values: ['Male', 'Female', 'Prefer not to say']
+        values: ['Male', 'Female', 'Prefer not to say'],
+        allowNull: false,
+    },
+    identificationDocument: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    age: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     }
 });
 
