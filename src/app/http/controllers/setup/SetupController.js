@@ -16,7 +16,7 @@ class Setupcontroller {
             res.ApiResponse.success(response);
 
         } catch (error) {
-            
+            res.ApiResponse.error(error);
         }
     }
 }
