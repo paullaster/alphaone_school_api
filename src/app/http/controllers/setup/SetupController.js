@@ -1,5 +1,5 @@
 import axios from 'axios';
-import countries from '../../../../../countries.json';
+import countries from '../../../../../countries.json' with { type: "json" };
 class Setupcontroller {
     async getCountriesList(req, res) {
         try {
@@ -12,9 +12,9 @@ class Setupcontroller {
                 return config;
             });
 
-            const response = await axios.get(countryApi);
-            console.log(response);
-            res.ApiResponse.success(response);
+            // const response = await axios.get(countryApi);
+            // console.log(response);
+            res.ApiResponse.success(countries);
 
         } catch (error) {
             res.ApiResponse.error(error);
