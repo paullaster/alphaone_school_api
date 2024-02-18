@@ -21,7 +21,7 @@ app.use(ApiResponder);
 // SERVING STATIC FILES
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use('/storage', express.static(path.join(__dirname, 'storage')));
+app.use('/storage', express.static(path.join(path.dirname(__dirname), 'storage')));
 
 app.use(route)
 
