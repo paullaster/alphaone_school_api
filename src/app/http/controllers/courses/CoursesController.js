@@ -37,6 +37,7 @@ class CoursesController {
             const imageEntry = {
                 url,
                 sourceID,
+                documentType: 'Course'
             };
             await Image.create(imageEntry);
             const course = await Course.create(courseData);
