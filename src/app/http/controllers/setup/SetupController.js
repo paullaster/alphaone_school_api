@@ -13,9 +13,12 @@ class Setupcontroller {
 
             const response = await axios.get(countryApi);
             console.log(response);
+            res.ApiResponse.success(response);
 
         } catch (error) {
             
         }
     }
 }
+
+export default new Setupcontroller();
