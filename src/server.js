@@ -3,6 +3,8 @@ import cors from 'cors';
 import { application } from './config/index.js';
 import {route } from './app/http/providers/index.js';
 import { ApiResponder } from './app/http/middlewares/ApiResponder.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 
 // APP INSTANCE
@@ -14,7 +16,12 @@ app.use(express.json());
 app.use(cors());
 
 app.use(ApiResponder);
-app.use(express.static(`${__dirname}/storage`));
+
+
+// SERVING STATIC FILES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use('/storage', express.static(path.join(__dirname, 'storage')));
 
 app.use(route)
 
