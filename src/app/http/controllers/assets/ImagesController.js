@@ -3,7 +3,12 @@ import { Image } from "../../../models/Image.js";
 class ImageController {
     async getImages(req, res) {
         try {
-            const images = await Image.findAndCountAll({});
+            const query = req.query;
+            const images = await Image.findAndCountAll({
+                where: {
+                    ...query
+                }
+            });
             res.ApiResponse.success(images, 200);
         } catch (error) {
             res.ApiResponse.error(error);
