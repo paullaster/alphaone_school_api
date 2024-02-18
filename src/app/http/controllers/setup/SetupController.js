@@ -1,4 +1,5 @@
 import axios from 'axios';
+import countries from '../../../../../countries.json';
 class Setupcontroller {
     async getCountriesList(req, res) {
         try {
