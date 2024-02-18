@@ -20,27 +20,28 @@ class CoursesController {
     }
     async createCourse(req, res) {
         try {
-            const image = req.body.image;
-            let url = '';
+            const {image, ...courseData} = req.body;
+            let url = `${application.url}/storage/public/images/${req.body.id}.png`;
             const ImageBuffer = Buffer.from(image, 'base64');
             Jimp.read(ImageBuffer)
             .then((result) => {
-                url = `${application.url}/storage/public/images/${req.body.id}.png`;
                 result.resize(180, 180)
                 .quality(50)
-                .write(`/storage/public/images/${req.body.id}.png`);
-
+                .write(`./storage/public/images/${req.body.id}.png`);
+                
             })
             .catch((error) => {
                 res.ApiResponse.error(error);
             });
-            const sourceID = new Buffer.from(req.body.id, 'base64');
+            const sourceID = new Buffer.from(req.body.id).toString('base64');
             const imageEntry = {
                 url,
                 sourceID,
             };
             await Image.create(imageEntry);
-            const course = await Course.create(req,body);
+            
+            console.log(courseData);
+            const course = await Course.create(courseData);
             res.ApiResponse.success(course, 201, `${course.name} course create successfully!`);
         } catch (error) {
             res.ApiResponse.error(error, 'We ran into an error when creating this course!');
