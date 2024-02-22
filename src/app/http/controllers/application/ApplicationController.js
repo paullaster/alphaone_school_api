@@ -3,6 +3,10 @@ import { Application } from "../../../models/Application.js";
 class ApplicationController {
     async apply(req, res) {
         try {
+            const applicationExists = await Application.findOne({ where: { course: req.body.course, applicant: req.body.applicant}});
+            if (applicationExists) {
+                res.ApiResponse.error(applicationExists, "Application already exists!", 422);
+            }
             const application = await Application.create(req.body);
             res.ApiResponse.success(application, 201, 'Application made successfully');
         } catch (error) {
