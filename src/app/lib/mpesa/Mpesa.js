@@ -82,11 +82,111 @@ async timeStamp() {
     return error.message;
   }
 }
+/**
+ * Generates a unique M-Pesa account number
+ * @returns {string} the generated account number
+ */
 async generateAccountNumber() {
-    try {
-        
-    } catch (error) {
-        
+  "use strict";
+
+  try {
+    // create a set to store the generated codes
+    const generatedCodes = new Set();
+
+    // set the initial account prefix to 'aaaa'
+    let prefix = "aaaa";
+
+    // create arrays of allowed letters and digits
+    const letters = "abcdefghijklmnopqrstuvwxyz";
+    const digits = "0123456789";
+
+    // loop until a unique account number is generated
+    while (true) {
+      // initialize the number of remaining characters to 8
+      let remainingChars = 8;
+
+      // create an array of available characters based on the remaining number of characters
+      let availableChars = [...letters, ...digits];
+
+      // create an array to store the randomly generated characters
+      const randomChars = [];
+
+      // initialize the digit count to 0
+      let digitCount = 0;
+
+      // loop until all remaining characters have been added to the random characters array
+      while (remainingChars > 0) {
+        // generate a random index for an available character
+        const randomIndex = Math.floor(Math.random() * availableChars.length);
+
+        // get the character at the random index
+        const char = availableChars[randomIndex];
+
+        // check if the character is a digit
+        if (!isNaN(char)) {
+          // increment the digit count
+          digitCount++;
+
+          // if the digit count is greater than 3, skip this iteration
+          if (digitCount > 3) continue;
+
+          // add the character to the random characters array at a random index
+          randomChars.splice(
+            Math.floor(Math.random() * randomChars.length),
+            0,
+            char
+          );
+        }
+        // if the digit count is 0 and there are only 1 or fewer remaining characters, skip this iteration
+        else if (digitCount === 0 && remainingChars <= 1) continue;
+        // otherwise, add the character to the random characters array
+        else randomChars.push(char);
+
+        // remove the character from the available characters array
+        availableChars.splice(randomIndex, 1);
+
+        // decrement the remaining character count
+        remainingChars--;
+      }
+
+      // create the account number from the random characters and the prefix
+      const code = prefix + randomChars.join("");
+
+      // check if the generated code is unique
+      if (!generatedCodes.has(code)) {
+        // add the generated code to the set
+        generatedCodes.add(code);
+
+        // return the generated code
+        return code.toUpperCase();
+      }
+
+      // if no unique codes could be generated, increment the prefix and try again
+      if (availableChars.length === 0) {
+        prefix = this.incrementPrefix(prefix);
+      }
     }
+  } catch (error) {
+    return error.message;
+  }
+}
+
+/**
+ * Increments the prefix of an M-Pesa account number
+ * @param {string} prefix the current prefix of the account number
+ * @returns {string} the incremented prefix
+ */
+incrementPrefix = (prefix) => {
+  const lastCharCode = prefix.charCodeAt(2) + 1;
+  if (lastCharCode <= 122) {
+    return prefix.slice(0, 2) + String.fromCharCode(lastCharCode);
+  } else {
+    const secondCharCode = prefix.charCodeAt(1) + 1;
+    if (secondCharCode <= 122) {
+      return prefix[0] + String.fromCharCode(secondCharCode) + "a";
+    } else {
+      return String.fromCharCode(prefix.charCodeAt(0) + 1) + "aa";
+    }
+  }
 }
 }
