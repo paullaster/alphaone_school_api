@@ -8,30 +8,30 @@ const Transaction = sequilize.define('Transaction', {
         unique: true,
         allowNull: false,
     },
-    name: {
+    phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    price: {
+    amount: {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    duration: {
+    transactionID: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
 
     },
     status: {
         type: DataTypes.STRING,
-        values: ['Active', 'Suspended'],
+        values: ['Pending', 'Settled'],
         allowNull: false,
     },
-    description: {
-        type: DataTypes.TEXT,
-        allowNull:false,
+    transactionDate: {
+        type: DataTypes.STRING,
+        allowNull:true,
     }
 });
 
-Course.sync();
+Transaction.sync();
 
-export { Course };
+export { Transaction };
