@@ -8,6 +8,10 @@ class AuthController {
 
   async login(req, res) {
     try {
+      if(!req.body) {
+        res.ApiResponse.error(req.body, 'Missing body', 400);
+    }
+    
       const user = await User.findOne({
         where: {
           email: req.body.email
