@@ -36,6 +36,9 @@ async getMpesaToken() {
                 CallBackURL: mpesa.mpesa_callback,
                 TransactionDesc: transaction.TransactionDesc
             };
+            if (transaction.TransactionType !== 'CustomerBuyGoodsOnline') {
+                body.AccountReference = 
+            }
             const response = await Axios._request(mpesa.express_api_url, {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -78,5 +81,12 @@ async timeStamp() {
   } catch (error) {
     return error.message;
   }
+}
+async generateAccountNumber() {
+    try {
+        
+    } catch (error) {
+        
+    }
 }
 }
