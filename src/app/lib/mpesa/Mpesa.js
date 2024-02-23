@@ -48,6 +48,10 @@ async getMpesaToken() {
         }
     }
     async timeStamp() {
-        
+        try {
+            
+        } catch (error) {
+            
+        }
     }
 }
