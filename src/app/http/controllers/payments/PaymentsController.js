@@ -19,7 +19,7 @@ class PaymentsController {
             const { applicationCode, ...transaction } = req.body;
 
             // Find the application based on the application code
-            const application = await findOne({ where: { id: applicationCode } });
+            const application = await Application.findOne({ where: { id: applicationCode } });
 
             // Check if the application exists
             if (!application) {
