@@ -30,6 +30,9 @@ class ApplicationController {
     }
     async update(req, res) {
         try {
+            if(!req.body) {
+                res.ApiResponse.error(req.body, 'Missing body', 400);
+            }
             const application = await Application.findOne({
                 where: {
                     id: req.body.applicationID,
