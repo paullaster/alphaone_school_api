@@ -4,6 +4,9 @@ import { Course } from "../../../models/Course.js";
 class ApplicationController {
     async apply(req, res) {
         try {
+            if(!req.body) {
+                res.ApiResponse.error(req.body, 'Missing body', 400);
+            }
             const applicationExists = await Application.findOne({ where: { course: req.body.course, applicant: req.body.applicant}});
             if (applicationExists) {
                 res.ApiResponse.error(applicationExists, "Application already exists!", 422);
