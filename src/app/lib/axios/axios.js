@@ -1,13 +1,17 @@
 import axios from 'axios';
 
 class Axios {
-    constructor(baseURL, options = {}) {
-        this._request = axios.create({
+    _request(baseURL, options = {}) {
+        return axios.create({
             baseURL: baseURL,
             ...options,
         });
     }
 }
+export default new Axios();
+
+
+
 // export const _request = axios.create({
 //     baseURL: APIBASEURL,
 // });

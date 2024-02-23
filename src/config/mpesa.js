@@ -3,5 +3,5 @@ export const mpesa = {
     express_production_url: process.env.MPESA_EXPRESS_PRODUCTION_URL,
     authorization_url: process.env.MPESA_AUTHORIZATION_URL,
     consumer_key: process.env.MPESA_CONSUMER_KEY,
-    comsumer_secret: process.env.MPESA_CONSUMER_SECRET
+    consumer_secret: process.env.MPESA_CONSUMER_SECRET
 }
