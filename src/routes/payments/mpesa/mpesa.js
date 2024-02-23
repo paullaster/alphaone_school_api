@@ -1,9 +1,9 @@
 import express from "express";
 import PaymentsController from "../../../app/http/controllers/payments/PaymentsController";
-const coursesRoutes = express.Router();
+const mpesaRoutes = express.Router();
 
-coursesRoutes.post('/', CoursesController.listCourses);
-coursesRoutes.post('/single', CoursesController.findCourse);
+mpesaRoutes.post('/', CoursesController.listCourses);
+mpesaRoutes.post('/niPushCallback', PaymentsController.mpesaNIPushCallback);
 
 
-export { coursesRoutes };
+export { mpesaRoutes };
