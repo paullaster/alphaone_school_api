@@ -51,12 +51,11 @@ async getMpesaToken() {
         try {
             const now = new Date();
             const year = now.getFullYear();
-            const month = now.getMonth() + 1;
+            const month = (now.getMonth() + 1) < 10 ? ;
             const day = now.getDate();
             const hour = now.getHours();
             const minute = now.getMinutes();
             const second = now.getSeconds();
-            const dateString = `${year}${month < 10}${day}${hour}${minute}${second}`;
         } catch (error) {
             
         }
