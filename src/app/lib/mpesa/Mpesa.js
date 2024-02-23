@@ -28,6 +28,7 @@ async getMpesaToken() {
                 BusinessShortCode: mpesa.business_shortcode,
                 Password: this.password,
                 Timestamp: this.timeStamp,
+                TransactionType: transaction.TransactionType,
             };
             const response = await Axios._request(mpesa.express_api_url, {
                 headers: {
