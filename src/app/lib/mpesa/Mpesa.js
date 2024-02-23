@@ -44,7 +44,7 @@ async getMpesaToken() {
         try {
             
         } catch (error) {
-            
+            return error.message;
         }
     }
     /**
