@@ -31,7 +31,7 @@ async getMpesaToken() {
  * @param {string} [transaction.TransactionDesc] a description of the transaction
  * @returns {object} the M-Pesa Express API response
  */
-async niPush(transaction) {
+async niPush(transaction, applicationCode = '') {
   try {
     const token = this.getMpesaToken();
     const body = {

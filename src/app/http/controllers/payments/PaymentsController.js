@@ -31,6 +31,10 @@ class PaymentsController {
             transaction.amount = stkCallback.CallbackMetadata[0].Value;
             transaction.transactionID = stkCallback.CallbackMetadata[1].Value;
             transaction.phoneNumber = stkCallback.CallbackMetadata[3].Value;
+            const updatedTransaction = await transaction.save();
+
+            
+
         } catch (error) {
             res.ApiResponse.error(error);
         }
