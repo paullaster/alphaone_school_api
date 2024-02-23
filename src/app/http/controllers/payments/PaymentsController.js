@@ -4,7 +4,11 @@ import { Transaction } from '../../../models/Transaction';
 
 class PaymentsController {
 async niPushInit(req, res)  {
-
+    try {
+        
+    } catch (error) {
+        
+    }
 }
     /**
  * Handles M-Pesa NIPUSH Callbacks
