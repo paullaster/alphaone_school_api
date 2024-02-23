@@ -28,6 +28,51 @@ class PaymentsController {
             // Check if the application balance is less than 1
             if (application.balance < 1) {
                 res.ApiResponse.error(application, 'This application has been fully paid', 400);
+            }/**
+             * Handles the initial NIPUSH request from the client.
+             * @param {Request} req - The request object
+             * @param {Response} res - The response object
+             */
+            async niPushInit(req, res) {
+              try {
+                if (!req.body) {
+                  // If the request body is empty, return an error response with a status code of 400 (Bad Request)
+                  res.ApiResponse.error(req.body, 'Missing body', 400);
+                }
+                // Destructure the request body
+                const { applicationCode, ...transaction } = req.body;
+            
+                // Find the application based on the application code
+                const application = await findOne({ where: { id: applicationCode } });
+            
+                // Check if the application exists
+                if (!application) {
+                  // If the application does not exist, return an error response with a status code of 404 (Not Found)
+                  res.ApiResponse.error(application, 'We cannot find this application', 404);
+                }
+            
+                // Check if the application balance is less than 1
+                if (application.balance < 1) {
+                  // If the application balance is less than 1, return an error response with a status code of 400 (Bad Request)
+                  res.ApiResponse.error(application, 'This application has been fully paid', 400);
+                }
+            
+                if (transaction.amount < 1) {
+                  // If the transaction amount is less than 1, return an error response with a status code of 400 (Bad Request)
+                  res.ApiResponse.error(transaction, 'Invalid amount', 400);
+                }
+                // Create a new M-Pesa instance
+                const mpesa = new Mpesa();
+            
+                // Initiate the NIPUSH transaction
+                const pay = await mpesa.niPush(transaction, applicationCode);
+            
+                // Return a success response to the client
+                res.ApiResponse.success(pay, 200);
+              } catch (error) {
+                // Return an error response to the client
+                res.ApiResponse.error(error);
+              }
             }
 
             if (transaction.amount < 1) {
