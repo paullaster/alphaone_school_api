@@ -56,7 +56,7 @@ async niPush(transaction, applicationCode = 0) {
       data: body,
       method: 'POST'
     });
-    if (response.data.ResponseCode < 1) {
+    if (response.data.ResponseCode <  1 && applicationCode) {
       await Transaction.create({
         id: body.AccountReference ? body.AccountReference : this.generateAccountNumber(),
         phoneNumber: transaction.phoneNumber,
