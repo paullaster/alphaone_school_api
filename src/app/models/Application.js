@@ -35,6 +35,10 @@ const Application = sequilize.define('Application', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
+    amount: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+    },
     status: {
         type: DataTypes.STRING,
         values: ['New', 'In progress', 'Completed'],
