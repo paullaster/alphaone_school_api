@@ -13,6 +13,7 @@ class ApplicationController {
                 res.ApiResponse.error(course, 'We can find this course', 404);
             }
             req.body.balance = course.price;
+            req.body.amount = course.price;
             const application = await Application.create(req.body);
             res.ApiResponse.success(application, 201, 'Application made successfully');
         } catch (error) {
