@@ -29,6 +29,10 @@ const Transaction = sequilize.define('Transaction', {
     transactionDate: {
         type: DataTypes.STRING,
         allowNull:true,
+    },
+    transactionMessage: {
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 });
 
