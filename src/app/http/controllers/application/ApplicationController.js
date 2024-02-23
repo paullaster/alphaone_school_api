@@ -1,4 +1,5 @@
 import { Application } from "../../../models/Application.js";
+import { Course } from "../../../models/Course.js";
 
 class ApplicationController {
     async apply(req, res) {
@@ -7,6 +8,7 @@ class ApplicationController {
             if (applicationExists) {
                 res.ApiResponse.error(applicationExists, "Application already exists!", 422);
             }
+            
             const application = await Application.create(req.body);
             res.ApiResponse.success(application, 201, 'Application made successfully');
         } catch (error) {

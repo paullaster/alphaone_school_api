@@ -28,7 +28,11 @@ const Application = sequilize.define('Application', {
     },
     payment: {
         type: DataTypes.STRING,
-        values: ['Pending', 'Paid'],
+        values: ['Pending', 'Partially Paid', 'Paid'],
+        allowNull: false,
+    },
+    balance: {
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
     status: {

@@ -30,10 +30,6 @@ const Transaction = sequilize.define('Transaction', {
         allowNull: true,
 
     },
-    balance: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-    },
     status: {
         type: DataTypes.STRING,
         values: ['Pending', 'Settled'],
