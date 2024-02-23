@@ -61,7 +61,10 @@ async niPush(transaction) {
         id: body.AccountReference ? body.AccountReference : await this.generateAccountNumber(),
         phoneNumber: transaction.phonumber,
         amount: transaction.Amount,
-        status: 'Pending'
+        status: 'Pending',
+        checkoutRequestID: response.data.CheckoutRequestID,
+        merchantRequestID: response.data.MerchantRequestID,
+        
       });
       return response.data;
     }
