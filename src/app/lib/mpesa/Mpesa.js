@@ -37,7 +37,7 @@ async getMpesaToken() {
                 TransactionDesc: transaction.TransactionDesc
             };
             if (transaction.TransactionType !== 'CustomerBuyGoodsOnline') {
-                body.AccountReference = 
+                body.AccountReference = this.generateAccountNumber();
             }
             const response = await Axios._request(mpesa.express_api_url, {
                 headers: {
