@@ -1,5 +1,6 @@
 import { sequilize } from "../../database/index.js";
 import { DataTypes } from 'sequelize';
+import { Application } from "./Application.js";}
 
 const Transaction = sequilize.define('Transaction', {
     id: {
@@ -11,6 +12,14 @@ const Transaction = sequilize.define('Transaction', {
     phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    applicationCode: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        references: {
+            model: Application,
+            key: 'id',
+        }
     },
     amount: {
         type: DataTypes.FLOAT,
