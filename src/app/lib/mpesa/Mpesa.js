@@ -1,5 +1,6 @@
 import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
+import { application } from '../../../config/app.js';
 
 class Mpesa {
    async getMpesaToken() {
@@ -15,6 +16,15 @@ class Mpesa {
         return response.data.access_token;
     }
     async niPush() {
-
+        const token = await this.getMpesaToken();
+        const response = await Axios._request(mpesa.api_url, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                shortcode: mpesa.shortcode,
+            }
+        }).catch(err => {});
+        return response.data;
     }
 }
