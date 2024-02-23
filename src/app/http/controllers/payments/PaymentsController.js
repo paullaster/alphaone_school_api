@@ -37,12 +37,12 @@ class PaymentsController {
             }
             // Create a new M-Pesa instance
             const mpesa = new Mpesa();
-
-            // Initiate the NIPUSH transaction
+            console.log(mpesa);
+            //Initiate the NIPUSH transaction
             mpesa.niPush(transaction, applicationCode)
                 .then((pay) => {
                     // Return a success response to the client
-                    res.ApiResponse.success(pay, 200);
+                    res.ApiResponse.success('mpesa', 200);
                 })
                 .catch((error) => {
                     // Return an error response to the client
