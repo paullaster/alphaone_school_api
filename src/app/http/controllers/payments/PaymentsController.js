@@ -1,5 +1,6 @@
 import { Application } from '../../../models/Application';
 import { Transaction } from '../../../models/Transaction';
+import { Mpesa } from '../../../lib/mpesa/Mpesa';
 
 
 class PaymentsController {
@@ -7,7 +8,7 @@ async niPushInit(req, res)  {
     try {
         
     } catch (error) {
-        
+        res.ApiResponse.error(error);
     }
 }
     /**
