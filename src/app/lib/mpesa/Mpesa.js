@@ -40,15 +40,24 @@ async getMpesaToken() {
             if (transaction.TransactionType !== 'CustomerBuyGoodsOnline') {
                 body.AccountReference = this.generateAccountNumber();
             }
-            const response = await Axios._request(mpesa.express_api_url, {
+            const response = Axios._request(mpesa.express_api_url, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
                 data: body,
-            }).catch(err => { });
+                method: 'POST'
+            });
+            if (response.data.ResponseCode < 1) {
+                const newTransaction = Transaction.create({
+                    id: body.AccountReference ? body.AccountReference : this.generateAccountNumber(),
+                    phoneNumber: transaction.phonumber,
+                    amount: transaction.Amount,
+                    status: 'Pending',
+                })
+            }
             return response.data;
         } catch (error) {
-
+            return error.message;
         }
     }
     /**
