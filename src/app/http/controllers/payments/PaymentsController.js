@@ -30,6 +30,9 @@ class PaymentsController {
                 res.ApiResponse.error(application, 'This application has been fully paid', 400);
             }
 
+            if (transaction.amount < 1) {
+                res.ApiResponse.error(transaction, 'Invalid amount', 400);
+            }
             // Create a new M-Pesa instance
             const mpesa = new Mpesa();
 
