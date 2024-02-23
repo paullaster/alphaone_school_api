@@ -111,7 +111,7 @@ async generateAccountNumber() {
   "use strict";
 
   try {
-    const codes = (await Transaction.findAll({attributes: {id}})).map(transaction => transaction.id);
+    const codes = (await Transaction.findAll({attributes: ['id']})).map(transaction => transaction.id);
     // create a set to store the generated codes
     const generatedCodes = new Set(codes);
 
