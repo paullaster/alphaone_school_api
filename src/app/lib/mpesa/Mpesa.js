@@ -42,7 +42,7 @@ async getMpesaToken() {
     }
     async password() {
         try {
-            
+            const stringToEncode = mpe
         } catch (error) {
             return error.message;
         }
