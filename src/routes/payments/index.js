@@ -1,7 +1,7 @@
 import express from "express";
 
-const useCoursesRoutes = express.Router();
+const usePaymentsRoutes = express.Router();
 
-useCoursesRoutes.use('/courses', coursesRoutes);
+usePaymentsRoutes.use('/courses', coursesRoutes);
 
-export { useCoursesRoutes };
+export { usePaymentsRoutes };
