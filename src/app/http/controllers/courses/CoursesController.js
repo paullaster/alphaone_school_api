@@ -20,6 +20,9 @@ class CoursesController {
     }
     async createCourse(req, res) {
         try {
+            if(!req.body) {
+                res.ApiResponse.error(req.body, 'Missing body', 400);
+            }
             const {image, ...courseData} = req.body;
             const course = await Course.create(courseData);
             let url = `${application.url}/storage/public/images/${req.body.id}.png`;
