@@ -22,7 +22,9 @@ class PaymentsController {
                     checkoutRequestID: stkCallback.CheckoutRequestID,
                 },
             });
-            
+            if (!transaction) {
+                res.ApiResponse.error(transaction, 'We can not find this transaction', 404);
+            }
         } catch (error) {
             res.ApiResponse.error(error);
         }
