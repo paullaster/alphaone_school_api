@@ -60,17 +60,17 @@ async niPush(transaction, applicationCode = 0) {
     });
     if (response.data.ResponseCode < 1) {
         const application = await Application.findOne({where:{id : applicationCode}});
-        
+        const course = await Course.findOne({where:{ id: application.course}});
 
       await Transaction.create({
-        id: body.AccountReference ? body.AccountReference : await this.generateAccountNumber(),
+        id: body.AccountReference ? body.AccountReference : this.generateAccountNumber(),
         phoneNumber: transaction.phonumber,
         amount: transaction.Amount,
         status: 'Pending',
         checkoutRequestID: response.data.CheckoutRequestID,
         merchantRequestID: response.data.MerchantRequestID,
         transactionMessage: response.data.ResponseDescription,
-        balance: Course
+        balance: course.price
       });
       return response.data;
     }
