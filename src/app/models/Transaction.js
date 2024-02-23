@@ -1,6 +1,6 @@
 import { sequilize } from "../../database/index.js";
 import { DataTypes } from 'sequelize';
-import { Application } from "./Application.js";}
+import { Application } from "./Application.js";
 
 const Transaction = sequilize.define('Transaction', {
     id: {
