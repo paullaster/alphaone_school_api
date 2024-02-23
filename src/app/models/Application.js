@@ -59,6 +59,6 @@ const Application = sequilize.define('Application', {
     }
 });
 
-Application.sync();
+Application.sync({force: true});
 
 export { Application };
