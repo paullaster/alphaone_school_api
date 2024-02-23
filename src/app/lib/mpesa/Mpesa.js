@@ -1,7 +1,6 @@
 import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
 import { Transaction } from '../../models/Transaction.js';
-import { Application } from '../../models/Application.js';
 class Mpesa {
     /**
  * Get M-Pesa Token
@@ -60,7 +59,7 @@ async niPush(transaction, applicationCode = 0) {
     if (response.data.ResponseCode < 1) {
       await Transaction.create({
         id: body.AccountReference ? body.AccountReference : this.generateAccountNumber(),
-        phoneNumber: transaction.phonumber,
+        phoneNumber: transaction.phoneNumber,
         amount: transaction.Amount,
         status: 'Pending',
         checkoutRequestID: response.data.CheckoutRequestID,
