@@ -25,6 +25,7 @@ async getMpesaToken() {
         try {
             const token = this.getMpesaToken();
             const body = {
+                BusinessShortCode: mpesa.business_shortcode,
                 Password: this.password,
                 Timestamp: this.timeStamp,
             };
