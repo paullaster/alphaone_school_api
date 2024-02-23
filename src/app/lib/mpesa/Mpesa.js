@@ -22,45 +22,54 @@ async getMpesaToken() {
     return error.message;
   }
 }
-    async niPush(transaction) {
-        try {
-            const token = this.getMpesaToken();
-            const body = {
-                BusinessShortCode: mpesa.business_shortcode,
-                Password: this.password,
-                Timestamp: this.timeStamp,
-                TransactionType: transaction.TransactionType,
-                Amount: transaction.Amount,
-                PartyA: this.formatPhoneNumber(transaction.phonumber),
-                PartyB: mpesa.business_shortcode,
-                PhoneNumber: this.formatPhoneNumber(transaction.phonumber),
-                CallBackURL: mpesa.mpesa_callback,
-                TransactionDesc: transaction.TransactionDesc
-            };
-            if (transaction.TransactionType !== 'CustomerBuyGoodsOnline') {
-                body.AccountReference = this.generateAccountNumber();
-            }
-            const response = Axios._request(mpesa.express_api_url, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-                data: body,
-                method: 'POST'
-            });
-            if (response.data.ResponseCode < 1) {
-                await Transaction.create({
-                    id: body.AccountReference ? body.AccountReference : this.generateAccountNumber(),
-                    phoneNumber: transaction.phonumber,
-                    amount: transaction.Amount,
-                    status: 'Pending',
-                });
-                return response.data;
-            }
-            throw new Error();
-        } catch (error) {
-            return error;
-        }
+    /**
+ * Submits a transaction to the M-Pesa Express API
+ * @param {object} transaction the transaction details
+ * @param {string} transaction.phonenumber the phone number of the recipient
+ * @param {number} transaction.Amount the amount to be transacted
+ * @param {string} transaction.TransactionType the type of transaction
+ * @param {string} [transaction.TransactionDesc] a description of the transaction
+ * @returns {object} the M-Pesa Express API response
+ */
+async niPush(transaction) {
+  try {
+    const token = this.getMpesaToken();
+    const body = {
+      BusinessShortCode: mpesa.business_shortcode,
+      Password: this.password,
+      Timestamp: this.timeStamp,
+      TransactionType: transaction.TransactionType,
+      Amount: transaction.Amount,
+      PartyA: this.formatPhoneNumber(transaction.phonumber),
+      PartyB: mpesa.business_shortcode,
+      PhoneNumber: this.formatPhoneNumber(transaction.phonumber),
+      CallBackURL: mpesa.mpesa_callback,
+      TransactionDesc: transaction.TransactionDesc
+    };
+    if (transaction.TransactionType !== 'CustomerBuyGoodsOnline') {
+      body.AccountReference = this.generateAccountNumber();
     }
+    const response = Axios._request(mpesa.express_api_url, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      data: body,
+      method: 'POST'
+    });
+    if (response.data.ResponseCode < 1) {
+      await Transaction.create({
+        id: body.AccountReference ? body.AccountReference : await this.generateAccountNumber(),
+        phoneNumber: transaction.phonumber,
+        amount: transaction.Amount,
+        status: 'Pending'
+      });
+      return response.data;
+    }
+    throw new Error();
+  } catch (error) {
+    return error;
+  }
+}
     /**
  * Returns a base64 encoded string of the M-Pesa password
  * @returns {string} base64 encoded M-Pesa password
