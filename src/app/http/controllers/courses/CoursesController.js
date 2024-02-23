@@ -67,6 +67,10 @@ class CoursesController {
     }
     async updateCourse(req, res) {
         try {
+            if(!req.body) {
+                res.ApiResponse.error(req.body, 'Missing body', 400);
+            }
+            
             const course = await Course.findByPk(req.body.courseID);
             if (!course) {
                 res.ApiResponse.error(course, 'We can find this course', 404);
