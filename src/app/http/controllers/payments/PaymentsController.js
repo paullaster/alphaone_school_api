@@ -32,7 +32,7 @@ class PaymentsController {
             }
 
             // If the transaction amount is less than 1, return an error response with a status code of 400 (Bad Request)
-            if (transaction.amount < 1) {
+            if (transaction.Amount < 1) {
                 res.ApiResponse.error(transaction, 'Invalid amount', 400);
             }
             // Create a new M-Pesa instance
