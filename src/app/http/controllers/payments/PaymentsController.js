@@ -8,6 +8,9 @@ async niPushInit(req, res)  {
     try {
         const { applicationCode, ...transaction } = req.body;
         const application = await findOne({ where: { id: applicationCode}});
+        if (!application) {
+            res.ApiResponse.error(application, 'We cannot find this application', 404);
+        }
         const mpesa = new Mpesa();
     } catch (error) {
         res.ApiResponse.error(error);
