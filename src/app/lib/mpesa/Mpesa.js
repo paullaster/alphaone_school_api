@@ -65,7 +65,7 @@ async niPush(transaction) {
       });
       return response.data;
     }
-    throw new Error();
+    throw new Error(JSON.stringify(response.data));
   } catch (error) {
     return error;
   }
