@@ -38,6 +38,12 @@ class PaymentsController {
                     id: updatedTransaction.applicationCode,
                 },
             });
+            if (!application) {
+                res.ApiResponse.error(application, 'We can not find this application', 404);
+            }
+            application.payment = 'Paid';
+            application.status = 'In progress';
+            await application.save();
 
 
         } catch (error) {
