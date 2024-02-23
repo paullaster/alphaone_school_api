@@ -2,7 +2,8 @@ import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
 class Mpesa {
    async getMpesaToken() {
-        const joinedKeys = `${mpesa.consumer_key}:${mpesa.consumer_secret}`;
+        try {
+            const joinedKeys = `${mpesa.consumer_key}:${mpesa.consumer_secret}`;
         const response = Axios._request(mpesa.authorization_url, {
             headers: {
                 Authorization: `Basic ${new Buffer.from(joinedKeys).toString('base64')}`
@@ -10,8 +11,11 @@ class Mpesa {
             params: {
                 grant_type: 'client_credentials',
             }
-        }).catch(err => {});
+        });
         return response.data.access_token;
+        } catch (error) {
+            return error;
+        }
     }
     async niPush(transaction) {
         const token = await this.getMpesaToken();
