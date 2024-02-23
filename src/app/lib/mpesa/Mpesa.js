@@ -199,7 +199,7 @@ class Mpesa {
      * @param {string} prefix the current prefix of the account number
      * @returns {string} the incremented prefix
      */
-    incrementPrefix(prefix) {
+    incrementPrefix = (prefix) => {
         const lastCharCode = prefix.charCodeAt(2) + 1;
         if (lastCharCode <= 122) {
             return prefix.slice(0, 2) + String.fromCharCode(lastCharCode);
