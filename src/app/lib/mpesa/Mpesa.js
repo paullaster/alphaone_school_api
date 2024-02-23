@@ -25,7 +25,7 @@ class Mpesa {
     /**
  * Submits a transaction to the M-Pesa Express API
  * @param {object} transaction the transaction details
- * @param {string} transaction.phonenumber the phone number of the recipient
+ * @param {string} transaction.phoneNumber the phone number of the recipient
  * @param {number} transaction.Amount the amount to be transacted
  * @param {string} transaction.TransactionType the type of transaction
  * @param {string} [transaction.TransactionDesc] a description of the transaction
