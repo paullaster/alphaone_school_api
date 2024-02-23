@@ -8,10 +8,10 @@ class AuthController {
 
   async login(req, res) {
     try {
-      if(!req.body) {
+      if (!req.body) {
         res.ApiResponse.error(req.body, 'Missing body', 400);
-    }
-    
+      }
+
       const user = await User.findOne({
         where: {
           email: req.body.email
@@ -46,6 +46,9 @@ class AuthController {
   };
   async signup(req, res) {
     try {
+      if (!req.body) {
+        res.ApiResponse.error(req.body, 'Missing body', 400);
+      }
       const user = await User.findOne({
         where: {
           email: req.body.email,
@@ -53,7 +56,7 @@ class AuthController {
       });
 
       if (user) {
-        req.ApiResponse.error({email: user.email}, `User ${user.email} already exist!`, 400);
+        req.ApiResponse.error({ email: user.email }, `User ${user.email} already exist!`, 400);
       };
       const url = `${application.weburl}/getstarted/confirm/${new Buffer.from(req.body.email).toString('base64')}`
       const mailSubject = "Email account verification";
