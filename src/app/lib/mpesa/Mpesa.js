@@ -25,7 +25,8 @@ async getMpesaToken() {
         try {
             const token = this.getMpesaToken();
             const body = {
-
+                Password: this.password,
+                Timestamp: this.timeStamp,
             };
             const response = await Axios._request(mpesa.express_api_url, {
                 headers: {
