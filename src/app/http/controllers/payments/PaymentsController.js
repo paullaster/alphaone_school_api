@@ -7,6 +7,7 @@ class PaymentsController {
 async niPushInit(req, res)  {
     try {
         const { applicationCode, ...transaction } = req.body;
+        const application = await findOne({ where: { id: applicationCode}});
         const mpesa = new Mpesa();
     } catch (error) {
         res.ApiResponse.error(error);
