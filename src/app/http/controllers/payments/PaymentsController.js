@@ -11,6 +11,7 @@ class PaymentsController {
      */
     async niPushInit(req, res) {
         try {
+            // If the request body is empty, return an error response with a status code of 400 (Bad Request)
             if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
@@ -30,6 +31,7 @@ class PaymentsController {
                 res.ApiResponse.error(application, 'This application has been fully paid', 400);
             }
 
+            // If the transaction amount is less than 1, return an error response with a status code of 400 (Bad Request)
             if (transaction.amount < 1) {
                 res.ApiResponse.error(transaction, 'Invalid amount', 400);
             }
@@ -53,6 +55,7 @@ class PaymentsController {
  */
     async mpesaNIPushCallback(req, res) {
         try {
+            // If the request body is empty, return an error response with a status code of 400 (Bad Request)
             if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
