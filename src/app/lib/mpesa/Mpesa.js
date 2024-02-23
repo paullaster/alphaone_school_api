@@ -43,7 +43,7 @@ async getMpesaToken() {
     async password() {
         try {
             const stringToEncode = mpesa.business_shortcode+mpesa.mpesa_passkey+this.timeStamp;
-            return new B
+            return new Buffer.from(stringToEncode).toString('base64');
         } catch (error) {
             return error.message;
         }
