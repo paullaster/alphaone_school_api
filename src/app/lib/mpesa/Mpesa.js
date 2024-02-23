@@ -64,7 +64,7 @@ async niPush(transaction) {
         status: 'Pending',
         checkoutRequestID: response.data.CheckoutRequestID,
         merchantRequestID: response.data.MerchantRequestID,
-        
+        transactionMessage: response.data.ResponseDescription,
       });
       return response.data;
     }
