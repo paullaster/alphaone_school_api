@@ -1,7 +1,6 @@
 import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
 import { Transaction } from '../../models/Transaction.js';
-import { Course } from '../../models/Course.js';
 import { Application } from '../../models/Application.js';
 class Mpesa {
     /**
@@ -42,9 +41,9 @@ async niPush(transaction, applicationCode = 0) {
       Timestamp: this.timeStamp,
       TransactionType: transaction.TransactionType,
       Amount: transaction.Amount,
-      PartyA: this.formatPhoneNumber(transaction.phonumber),
+      PartyA: this.formatPhoneNumber(transaction.phoneNumber),
       PartyB: mpesa.business_shortcode,
-      PhoneNumber: this.formatPhoneNumber(transaction.phonumber),
+      PhoneNumber: this.formatPhoneNumber(transaction.phoneNumber),
       CallBackURL: mpesa.mpesa_callback,
       TransactionDesc: transaction.TransactionDesc
     };
@@ -59,9 +58,6 @@ async niPush(transaction, applicationCode = 0) {
       method: 'POST'
     });
     if (response.data.ResponseCode < 1) {
-        const application = await Application.findOne({where:{id : applicationCode}});
-        const course = await Course.findOne({where:{ id: application.course}});
-
       await Transaction.create({
         id: body.AccountReference ? body.AccountReference : this.generateAccountNumber(),
         phoneNumber: transaction.phonumber,
@@ -70,7 +66,6 @@ async niPush(transaction, applicationCode = 0) {
         checkoutRequestID: response.data.CheckoutRequestID,
         merchantRequestID: response.data.MerchantRequestID,
         transactionMessage: response.data.ResponseDescription,
-        balance: course.price
       });
       return response.data;
     }
