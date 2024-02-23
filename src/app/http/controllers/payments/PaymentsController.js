@@ -16,6 +16,12 @@ class PaymentsController {
                 transaction.destroy();
                 res.ApiResponse.error(transaction, stkCallback.ResultDesc, stkCallback.ResultCode);
             }
+            const transaction = Transaction.findOne({
+                where: {
+                    merchantRequestID: stkCallback.MerchantRequestID,
+                    checkoutRequestID: stkCallback.CheckoutRequestID,
+                }
+            })
         } catch (error) {
             res.ApiResponse.error(error);
         }
