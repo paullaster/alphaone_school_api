@@ -4,22 +4,41 @@ import { Mpesa } from '../../../lib/mpesa/Mpesa';
 
 
 class PaymentsController {
-async niPushInit(req, res)  {
-    try {
-        const { applicationCode, ...transaction } = req.body;
-        const application = await findOne({ where: { id: applicationCode}});
-        if (!application) {
-            res.ApiResponse.error(application, 'We cannot find this application', 404);
-        }
-        if (application.balance < 1) {
-            res.ApiResponse.error(application, 'This application has been fully paid', 400);
-        }
-        const mpesa = new Mpesa();
-        const pay = await mpesa.niPush(transaction, applicationCode);
-        res.ApiResponse.success(pay, 200);
-    } catch (error) {
-        res.ApiResponse.error(error);
+/**
+ * Handles the initial NIPUSH request from the client.
+ * @param {Request} req - The request object
+ * @param {Response} res - The response object
+ */
+async niPushInit(req, res) {
+  try {
+    // Destructure the request body
+    const { applicationCode, ...transaction } = req.body;
+
+    // Find the application based on the application code
+    const application = await findOne({ where: { id: applicationCode } });
+
+    // Check if the application exists
+    if (!application) {
+      res.ApiResponse.error(application, 'We cannot find this application', 404);
     }
+
+    // Check if the application balance is less than 1
+    if (application.balance < 1) {
+      res.ApiResponse.error(application, 'This application has been fully paid', 400);
+    }
+
+    // Create a new M-Pesa instance
+    const mpesa = new Mpesa();
+
+    // Initiate the NIPUSH transaction
+    const pay = await mpesa.niPush(transaction, applicationCode);
+
+    // Return a success response to the client
+    res.ApiResponse.success(pay, 200);
+  } catch (error) {
+    // Return an error response to the client
+    res.ApiResponse.error(error);
+  }
 }
     /**
  * Handles M-Pesa NIPUSH Callbacks
