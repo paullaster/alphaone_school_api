@@ -1,7 +1,5 @@
 import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
-import { application } from '../../../config/app.js';
-
 class Mpesa {
    async getMpesaToken() {
         const joinedKeys = `${mpesa.consumer_key}:${mpesa.consumer_secret}`;
@@ -15,9 +13,12 @@ class Mpesa {
         }).catch(err => {});
         return response.data.access_token;
     }
-    async niPush() {
+    async niPush(transaction) {
         const token = await this.getMpesaToken();
-        const response = await Axios._request(mpesa.api_url, {
+        const body = {
+
+        };
+        const response = await Axios._request(mpesa.express_api_url, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
