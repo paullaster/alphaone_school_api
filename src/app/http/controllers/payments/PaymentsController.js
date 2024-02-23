@@ -33,7 +33,12 @@ class PaymentsController {
             transaction.phoneNumber = stkCallback.CallbackMetadata[3].Value;
             const updatedTransaction = await transaction.save();
 
-            
+            const application = await Application.findOne({
+                where: {
+                    id: updatedTransaction.applicationCode,
+                },
+            });
+
 
         } catch (error) {
             res.ApiResponse.error(error);
