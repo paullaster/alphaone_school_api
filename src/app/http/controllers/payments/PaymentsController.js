@@ -25,6 +25,12 @@ class PaymentsController {
             if (!transaction) {
                 res.ApiResponse.error(transaction, 'We can not find this transaction', 404);
             }
+            transaction.transactionMessage = stkCallback.ResultDesc;
+            transaction.status = 'Settled';
+            transaction.transactionDate = stkCallback.CallbackMetadata[2].Value;
+            transaction.amount = stkCallback.CallbackMetadata[0].Value;
+            transaction.transactionID = stkCallback.CallbackMetadata[1].Value;
+            transaction.phoneNumber = stkCallback.CallbackMetadata[3].Value;
         } catch (error) {
             res.ApiResponse.error(error);
         }
