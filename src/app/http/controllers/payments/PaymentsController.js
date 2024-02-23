@@ -11,6 +11,9 @@ async niPushInit(req, res)  {
         if (!application) {
             res.ApiResponse.error(application, 'We cannot find this application', 404);
         }
+        if (application.balance < 1) {
+            res.ApiResponse.error(application, 'This application has been fully paid', 400);
+        }
         const mpesa = new Mpesa();
     } catch (error) {
         res.ApiResponse.error(error);
