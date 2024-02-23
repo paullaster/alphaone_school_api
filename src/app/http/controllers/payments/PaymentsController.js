@@ -3,7 +3,9 @@ import { Transaction } from '../../../models/Transaction';
 
 
 class PaymentsController {
-    
+async niPushInit(req, res)  {
+
+}
     /**
  * Handles M-Pesa NIPUSH Callbacks
  * @param {Request} req - The request object
