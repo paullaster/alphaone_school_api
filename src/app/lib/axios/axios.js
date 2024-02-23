@@ -7,11 +7,11 @@ class Axios {
  * @param {AxiosRequestConfig} [options] - The options for the Axios instance.
  * @returns {Axios} The new Axios instance.
  */
-async _request(baseURL, options = {}) {
+constructor(baseURL, options = {}) {
     return axios.create({
         baseURL: baseURL,
         ...options,
     });
 }
 }
-export default new Axios();
+export default Axios;

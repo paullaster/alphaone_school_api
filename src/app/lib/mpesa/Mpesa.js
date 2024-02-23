@@ -49,7 +49,8 @@ class Mpesa {
             if (transaction.TransactionType !== 'CustomerBuyGoodsOnline') {
                 body.AccountReference = this.generateAccountNumber();
             }
-            const response = Axios._request(mpesa.express_api_url, {
+            
+            const response = new Axios(mpesa.express_api_url, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
