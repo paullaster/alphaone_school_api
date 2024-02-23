@@ -48,16 +48,17 @@ async getMpesaToken() {
                 method: 'POST'
             });
             if (response.data.ResponseCode < 1) {
-                const newTransaction = Transaction.create({
+                await Transaction.create({
                     id: body.AccountReference ? body.AccountReference : this.generateAccountNumber(),
                     phoneNumber: transaction.phonumber,
                     amount: transaction.Amount,
                     status: 'Pending',
-                })
+                });
+                return response.data;
             }
-            return response.data;
+            throw new Error();
         } catch (error) {
-            return error.message;
+            return error;
         }
     }
     /**
