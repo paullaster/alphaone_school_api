@@ -222,3 +222,5 @@ formatPhoneNumber(phoneNumber) {
   // TODO: Implement this function.
 }
 }
+
+export {Mpesa}
