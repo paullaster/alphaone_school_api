@@ -29,6 +29,11 @@ async getMpesaToken() {
                 Password: this.password,
                 Timestamp: this.timeStamp,
                 TransactionType: transaction.TransactionType,
+                Amount: transaction.Amount,
+                PartyA: this.formatPhoneNumber(transaction.PartyA),
+                PartyB: transaction.PartyB,
+                PhoneNumber: transaction.PhoneNumber,
+               CallBackURL: transaction.CallBackURL,
             };
             const response = await Axios._request(mpesa.express_api_url, {
                 headers: {
