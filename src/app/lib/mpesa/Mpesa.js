@@ -65,6 +65,7 @@ async niPush(transaction, applicationCode = 0) {
         checkoutRequestID: response.data.CheckoutRequestID,
         merchantRequestID: response.data.MerchantRequestID,
         transactionMessage: response.data.ResponseDescription,
+        applicationCode: applicationCode,
       });
       return response.data;
     }
