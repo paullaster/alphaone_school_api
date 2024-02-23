@@ -219,7 +219,16 @@ class Mpesa {
  * @returns {string} The formatted phone number.
  */
     formatPhoneNumber(phoneNumber) {
-        // TODO: Implement this function.
+        const firstChar = phoneNumber.charAt(0);
+        switch (firstChar) {
+            case '0':
+                return `254${phoneNumber.slice(1)}`;
+            case '+':
+                return phoneNumber.slice(1);
+            case "7":
+                return phoneNumber.length < 10 ? `254${phoneNumber}` : phoneNumber;
+            default: return phoneNumber;
+        }
     }
 }
 
