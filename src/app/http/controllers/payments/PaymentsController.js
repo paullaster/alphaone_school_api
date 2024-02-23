@@ -20,8 +20,9 @@ class PaymentsController {
                 where: {
                     merchantRequestID: stkCallback.MerchantRequestID,
                     checkoutRequestID: stkCallback.CheckoutRequestID,
-                }
-            })
+                },
+            });
+            
         } catch (error) {
             res.ApiResponse.error(error);
         }
