@@ -2,6 +2,7 @@ import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
 import { Transaction } from '../../models/Transaction.js';
 import { Course } from '../../models/Course.js';
+import { Application } from '../../models/Application.js';
 class Mpesa {
     /**
  * Get M-Pesa Token
@@ -32,7 +33,7 @@ async getMpesaToken() {
  * @param {string} [transaction.TransactionDesc] a description of the transaction
  * @returns {object} the M-Pesa Express API response
  */
-async niPush(transaction, applicationCode = '') {
+async niPush(transaction, applicationCode = 0) {
   try {
     const token = this.getMpesaToken();
     const body = {
@@ -58,6 +59,9 @@ async niPush(transaction, applicationCode = '') {
       method: 'POST'
     });
     if (response.data.ResponseCode < 1) {
+        const application = await Application.findOne({where:{id : applicationCode}});
+        
+
       await Transaction.create({
         id: body.AccountReference ? body.AccountReference : await this.generateAccountNumber(),
         phoneNumber: transaction.phonumber,
