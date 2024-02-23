@@ -218,9 +218,9 @@ class Mpesa {
  * @param {string} phoneNumber - The phone number to format.
  * @returns {string} The formatted phone number.
  */
-formatPhoneNumber(phoneNumber) {
-  // TODO: Implement this function.
-}
+    formatPhoneNumber(phoneNumber) {
+        // TODO: Implement this function.
+    }
 }
 
-export {Mpesa}
+export { Mpesa }
