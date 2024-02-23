@@ -51,7 +51,7 @@ class CoursesController {
     }
     async findCourse(req, res) {
         try {
-            const query = req.query;
+            const query = req?.query;
             const course = await Course.findOne({
                 where: {
                     ...query,
