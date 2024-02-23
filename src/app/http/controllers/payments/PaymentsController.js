@@ -39,10 +39,12 @@ class PaymentsController {
             const mpesa = new Mpesa();
 
             // Initiate the NIPUSH transaction
-            const pay = await mpesa.niPush(transaction, applicationCode);
+            mpesa.niPush(transaction, applicationCode)
+            .then((pay) => {
+                // Return a success response to the client
+                res.ApiResponse.success(pay, 200);
+            });
 
-            // Return a success response to the client
-            res.ApiResponse.success(pay, 200);
         } catch (error) {
             // Return an error response to the client
             res.ApiResponse.error(error);
