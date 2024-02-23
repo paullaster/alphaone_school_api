@@ -40,14 +40,18 @@ async getMpesaToken() {
 
         }
     }
-    async password() {
-        try {
-            const stringToEncode = mpesa.business_shortcode+mpesa.mpesa_passkey+this.timeStamp;
-            return new Buffer.from(stringToEncode).toString('base64');
-        } catch (error) {
-            return error.message;
-        }
-    }
+    /**
+ * Returns a base64 encoded string of the M-Pesa password
+ * @returns {string} base64 encoded M-Pesa password
+ */
+async password() {
+  try {
+    const stringToEncode = mpesa.business_shortcode + mpesa.mpesa_passkey + this.timeStamp;
+    return new Buffer.from(stringToEncode).toString('base64');
+  } catch (error) {
+    return error.message;
+  }
+}
     /**
  * Returns a timestamp in the format YYYYMMDDhhmmss
  * @returns {string} timestamp
