@@ -56,7 +56,7 @@ async getMpesaToken() {
             const hour = now.getHours();
             const minute = now.getMinutes();
             const second = now.getSeconds();
-            const dateString = 
+            const dateString = `${year}${month < 10}${day}${hour}${minute}${second}`;
         } catch (error) {
             
         }
