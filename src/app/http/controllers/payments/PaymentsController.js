@@ -40,10 +40,14 @@ class PaymentsController {
 
             // Initiate the NIPUSH transaction
             mpesa.niPush(transaction, applicationCode)
-            .then((pay) => {
-                // Return a success response to the client
-                res.ApiResponse.success(pay, 200);
-            });
+                .then((pay) => {
+                    // Return a success response to the client
+                    res.ApiResponse.success(pay, 200);
+                })
+                .catch((error) => {
+                    // Return an error response to the client
+                    res.ApiResponse.error(error);
+                });
 
         } catch (error) {
             // Return an error response to the client
