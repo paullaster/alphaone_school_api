@@ -8,7 +8,11 @@ class ApplicationController {
             if (applicationExists) {
                 res.ApiResponse.error(applicationExists, "Application already exists!", 422);
             }
-            
+            const course = await Course.findOne({ where: { id: req.body.course} });
+            if (!course) {
+                res.ApiResponse.error(course, 'We can find this course', 404);
+            }
+            req.body.balance = course.price;
             const application = await Application.create(req.body);
             res.ApiResponse.success(application, 201, 'Application made successfully');
         } catch (error) {
