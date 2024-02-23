@@ -56,6 +56,7 @@ async getMpesaToken() {
             const hour = now.getHours();
             const minute = now.getMinutes();
             const second = now.getSeconds();
+            ti
         } catch (error) {
             
         }
