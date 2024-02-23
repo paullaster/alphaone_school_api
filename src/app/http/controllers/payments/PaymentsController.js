@@ -15,6 +15,8 @@ async niPushInit(req, res)  {
             res.ApiResponse.error(application, 'This application has been fully paid', 400);
         }
         const mpesa = new Mpesa();
+        const pay = await mpesa.niPush(transaction, applicationCode);
+        res.ApiResponse.success(pay, 200);
     } catch (error) {
         res.ApiResponse.error(error);
     }
