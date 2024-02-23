@@ -43,9 +43,8 @@ class PaymentsController {
             }
             application.payment = 'Paid';
             application.status = 'In progress';
-            await application.save();
-
-
+            const paidApplication = await application.save();
+            res.ApiResponse.success(paidApplication);
         } catch (error) {
             res.ApiResponse.error(error);
         }
