@@ -85,6 +85,9 @@ class AuthController {
   }
   async createUser(req, res, next) {
     try {
+      if(!req.body) {
+        res.ApiResponse.error(req.body, 'Missing body', 400);
+    }
       const password = req.body.password;
       const saltRounds = 12;
       bcrypt
