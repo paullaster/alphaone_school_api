@@ -34,6 +34,7 @@ async getMpesaToken() {
                 PartyB: mpesa.business_shortcode,
                 PhoneNumber: this.formatPhoneNumber(transaction.phonumber),
                 CallBackURL: mpesa.mpesa_callback,
+                TransactionDesc: transaction.TransactionDesc
             };
             const response = await Axios._request(mpesa.express_api_url, {
                 headers: {
