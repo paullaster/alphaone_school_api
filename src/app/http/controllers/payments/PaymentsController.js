@@ -6,7 +6,7 @@ import { Mpesa } from '../../../lib/mpesa/Mpesa';
 class PaymentsController {
 async niPushInit(req, res)  {
     try {
-        
+        const { applicationCode, ...transaction } = req.body;
     } catch (error) {
         res.ApiResponse.error(error);
     }
