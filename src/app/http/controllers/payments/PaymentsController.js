@@ -41,7 +41,8 @@ class PaymentsController {
             if (!application) {
                 res.ApiResponse.error(application, 'We can not find this application', 404);
             }
-            application.payment = 'Paid';
+            application.balance = ((application.balance)  - (updatedTransaction.amount))
+            application.payment = application.balance === 0 ? 'Paid' : 'Partially Paid';
             application.status = 'In progress';
             const paidApplication = await application.save();
             res.ApiResponse.success(paidApplication, 201, 'Application has been successfully piad');
