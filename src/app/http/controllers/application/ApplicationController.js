@@ -4,14 +4,14 @@ import { Course } from "../../../models/Course.js";
 class ApplicationController {
     async apply(req, res) {
         try {
-            if(!req.body) {
+            if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
-            const applicationExists = await Application.findOne({ where: { course: req.body.course, applicant: req.body.applicant}});
+            const applicationExists = await Application.findOne({ where: { course: req.body.course, applicant: req.body.applicant } });
             if (applicationExists) {
                 res.ApiResponse.error(applicationExists, "Application already exists!", 422);
             }
-            const course = await Course.findOne({ where: { id: req.body.course} });
+            const course = await Course.findOne({ where: { id: req.body.course } });
             if (!course) {
                 res.ApiResponse.error(course, 'We cannot find this course', 404);
             }
@@ -33,7 +33,7 @@ class ApplicationController {
     }
     async update(req, res) {
         try {
-            if(!req.body) {
+            if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
             const application = await Application.findOne({
@@ -57,7 +57,7 @@ class ApplicationController {
     }
     async deleteApplication(req, res) {
         try {
-            if(!req.body) {
+            if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
             const application = await findByPk(req.body.id);
@@ -70,9 +70,9 @@ class ApplicationController {
             req.ApiResponse.error(error, "failed to delete the application");
         }
     }
-    async application (req, res) {
+    async application(req, res) {
         try {
-            if(!req.body) {
+            if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
             const app = await Application.findOne({
@@ -80,10 +80,10 @@ class ApplicationController {
                     id: req.body.applicationID,
                 },
             });
-            if(!app) {
+            if (!app) {
                 res.ApiResponse.error(app, 'We can not find this application', 404);
             }
-            res.ApiResponse.success(app, 200);   
+            res.ApiResponse.success(app, 200);
         } catch (error) {
             req.ApiResponse.error(error, 'We ran into an error while getting this application!');
         }

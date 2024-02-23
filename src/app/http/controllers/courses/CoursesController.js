@@ -20,23 +20,23 @@ class CoursesController {
     }
     async createCourse(req, res) {
         try {
-            if(!req.body) {
+            if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
-            const {image, ...courseData} = req.body;
+            const { image, ...courseData } = req.body;
             const course = await Course.create(courseData);
             let url = `${application.url}/storage/public/images/${req.body.id}.png`;
             const ImageBuffer = Buffer.from(image, 'base64');
             Jimp.read(ImageBuffer)
-            .then((result) => {
-                result.resize(180, 180)
-                .quality(50)
-                .write(`./storage/public/images/${req.body.id}.png`);
-                
-            })
-            .catch((error) => {
-                res.ApiResponse.error(error);
-            });
+                .then((result) => {
+                    result.resize(180, 180)
+                        .quality(50)
+                        .write(`./storage/public/images/${req.body.id}.png`);
+
+                })
+                .catch((error) => {
+                    res.ApiResponse.error(error);
+                });
             const sourceID = new Buffer.from(req.body.id).toString('base64');
             const imageEntry = {
                 url,
@@ -67,7 +67,7 @@ class CoursesController {
     }
     async updateCourse(req, res) {
         try {
-            if(!req.body) {
+            if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
 
@@ -86,10 +86,10 @@ class CoursesController {
     }
     async deletecourse(req, res) {
         try {
-            if(!req.body) {
+            if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
-            
+
             const item = await Course.findByPk(req.body.courseID);
             if (!item) {
                 res.ApiResponse.error(item, "We can not find this course", 404);
