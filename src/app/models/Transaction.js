@@ -33,6 +33,16 @@ const Transaction = sequilize.define('Transaction', {
     transactionMessage: {
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    merchantRequestID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    checkoutRequestID: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
     }
 });
 
