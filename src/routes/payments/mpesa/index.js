@@ -1,8 +1,8 @@
 import express from "express";
 import { mpesaRoutes } from "./mpesa.js";
 
-const useCoursesRoutes = express.Router();
+const useMpesaRoutes = express.Router();
 
-useCoursesRoutes.use('/courses', coursesRoutes);
+useMpesaRoutes.use('/mpesa', mpesaRoutes);
 
-export { useCoursesRoutes };
+export { useMpesaRoutes };
