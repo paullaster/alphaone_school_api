@@ -31,7 +31,8 @@ const Transaction = sequilize.define('Transaction', {
 
     },
     balance: {
-        
+        type: DataTypes.FLOAT,
+        allowNull: false,
     },
     status: {
         type: DataTypes.STRING,
