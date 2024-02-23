@@ -50,6 +50,9 @@ async niPushInit(req, res) {
  */
 async mpesaNIPushCallback(req, res) {
   try {
+    if(!req.body) {
+        res.ApiResponse.error(req.body, 'Missing body', 400);
+    }
     const stkCallback = req.body.Body.stkCallback;
     const transaction = await Transaction.findOne({
       where: {
