@@ -1,6 +1,7 @@
 import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
 import { Transaction } from '../../models/Transaction.js';
+import { Course } from '../../models/Course.js';
 class Mpesa {
     /**
  * Get M-Pesa Token
@@ -65,6 +66,7 @@ async niPush(transaction, applicationCode = '') {
         checkoutRequestID: response.data.CheckoutRequestID,
         merchantRequestID: response.data.MerchantRequestID,
         transactionMessage: response.data.ResponseDescription,
+        balance: Course
       });
       return response.data;
     }
