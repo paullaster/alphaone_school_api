@@ -10,7 +10,7 @@ class ApplicationController {
             }
             const course = await Course.findOne({ where: { id: req.body.course} });
             if (!course) {
-                res.ApiResponse.error(course, 'We can find this course', 404);
+                res.ApiResponse.error(course, 'We cannot find this course', 404);
             }
             req.body.balance = course.price;
             req.body.amount = course.price;
