@@ -9,7 +9,8 @@ class Mpesa {
     async getMpesaToken() {
         try {
             const joinedKeys = `${mpesa.consumer_key}:${mpesa.consumer_secret}`;
-            const response = Axios._request(mpesa.authorization_url, {
+            
+            const response = new Axios(mpesa.authorization_url, {
                 headers: {
                     Authorization: `Basic ${new Buffer.from(joinedKeys).toString('base64')}`,
                 },
