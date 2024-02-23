@@ -1,5 +1,6 @@
 import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
+import { Transaction } from '../../models/Transaction.js';
 class Mpesa {
     /**
  * Get M-Pesa Token
