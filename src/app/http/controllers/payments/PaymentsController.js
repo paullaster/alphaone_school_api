@@ -11,6 +11,9 @@ class PaymentsController {
  */
 async niPushInit(req, res) {
   try {
+    if (!req.body) {
+        res.ApiResponse.error(req.body, 'Missing body', 400);
+    }
     // Destructure the request body
     const { applicationCode, ...transaction } = req.body;
 
