@@ -111,8 +111,9 @@ async generateAccountNumber() {
   "use strict";
 
   try {
+    const codes = (await Transaction.findAll({attributes: {id}})).map(transaction => transaction.id);
     // create a set to store the generated codes
-    const generatedCodes = new Set();
+    const generatedCodes = new Set(codes);
 
     // set the initial account prefix to 'aaaa'
     let prefix = "aaaa";
