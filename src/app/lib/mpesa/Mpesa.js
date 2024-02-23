@@ -43,9 +43,7 @@ async getMpesaToken() {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
-                params: {
-                    shortcode: mpesa.shortcode,
-                }
+                data: body,
             }).catch(err => { });
             return response.data;
         } catch (error) {
