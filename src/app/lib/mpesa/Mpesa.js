@@ -49,7 +49,8 @@ async getMpesaToken() {
     }
     async timeStamp() {
         try {
-            
+            const now = new Date();
+            const year = now.getFullYear();
         } catch (error) {
             
         }
