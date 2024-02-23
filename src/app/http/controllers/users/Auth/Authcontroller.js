@@ -83,7 +83,7 @@ class AuthController {
 
 
   }
-  async createUser(req, res, next) {
+  async createUser(req, res) {
     try {
       if(!req.body) {
         res.ApiResponse.error(req.body, 'Missing body', 400);
