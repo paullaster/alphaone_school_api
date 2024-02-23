@@ -1,6 +1,6 @@
-import { Application } from '../../../models/Application';
-import { Transaction } from '../../../models/Transaction';
-import { Mpesa } from '../../../lib/mpesa/Mpesa';
+import { Application } from '../../../models/Application.js';
+import { Transaction } from '../../../models/Transaction.js';
+import { Mpesa } from '../../../lib/mpesa/Mpesa.js';
 
 
 class PaymentsController {

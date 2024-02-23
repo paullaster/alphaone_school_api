@@ -14,7 +14,7 @@ const Transaction = sequilize.define('Transaction', {
         allowNull: false,
     },
     applicationCode: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
         references: {
             model: Application,

@@ -1,8 +1,8 @@
 import express from "express";
-import PaymentsController from "../../../app/http/controllers/payments/PaymentsController";
+import PaymentsController from "../../../app/http/controllers/payments/PaymentsController.js";
 const mpesaRoutes = express.Router();
 
-mpesaRoutes.post('/nipush', );
+mpesaRoutes.post('/nipush', PaymentsController.niPushInit);
 mpesaRoutes.post('/nipushcallback', PaymentsController.mpesaNIPushCallback);
 
 
