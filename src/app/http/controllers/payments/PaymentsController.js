@@ -113,3 +113,5 @@ async mpesaNIPushCallback(req, res) {
   }
 }
 }
+
+export default new PaymentsController();
