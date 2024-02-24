@@ -18,6 +18,7 @@ class Mpesa {
                     grant_type: 'client_credentials',
                 },
             });
+            console.log(response);
             return response.data.access_token;
         } catch (error) {
             return error.message;
