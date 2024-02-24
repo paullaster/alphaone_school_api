@@ -74,9 +74,11 @@ class Mpesa {
                 });
                 return response.data;
             }
+            console.log("error response", response.data)
             throw new Error(JSON.stringify(response.data));
         } catch (error) {
-            throw new Error( error);
+            console.log("Logged error in catch", error);
+            throw new Error(error);
         }
     }
     /**
