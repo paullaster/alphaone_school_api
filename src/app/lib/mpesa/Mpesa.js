@@ -1,24 +1,26 @@
-import Axios from '../axios/axios.js';
 import { mpesa } from '../../../config/mpesa.js';
 import { Transaction } from '../../models/Transaction.js';
+import axios from 'axios';
 class Mpesa {
     /**
  * Get M-Pesa Token
  * @returns {string} access_token
  */
-    async getMpesaToken() {
+    getMpesaToken = async () => {
         try {
             const joinedKeys = `${mpesa.consumer_key}:${mpesa.consumer_secret}`;
-            
-            const response = new Axios(mpesa.authorization_url, {
+        
+            const configs = {
+                url: mpesa.authorization_url,
+                method: 'GET',
                 headers: {
-                    Authorization: `Basic ${new Buffer.from(joinedKeys).toString('base64')}`,
-                },
+                           Authorization: `Basic ${new Buffer.from(joinedKeys).toString('base64')}`,
+                        },
                 params: {
-                    grant_type: 'client_credentials',
-                },
-            });
-            console.log(response);
+                          grant_type: 'client_credentials',
+                     },
+            };
+            const response = await axios.request(configs)
             return response.data.access_token;
         } catch (error) {
             return error.message;
@@ -35,7 +37,7 @@ class Mpesa {
  */
     niPush = async (transaction, applicationCode = 0) =>{
         try {
-            const token = this.getMpesaToken();
+            const token =  await this.getMpesaToken();
             const body = {
                 BusinessShortCode: mpesa.business_shortcode,
                 Password: this.password,
@@ -52,7 +54,8 @@ class Mpesa {
                 body.AccountReference = this.generateAccountNumber();
             }
             
-            const response = new Axios(mpesa.express_api_url, {
+            const response = await axios.request({
+                url: mpesa.express_api_url, 
                 headers: {
                     Authorization: `Bearer ${token}`
                 },

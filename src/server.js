@@ -23,9 +23,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use('/storage', express.static(path.join(path.dirname(__dirname), 'storage')));
 
-app.use(route)
-
-
+app.use(route);
 
 app.listen(application.port, () => {
     console.log(`Server started. ${application.url}`)
