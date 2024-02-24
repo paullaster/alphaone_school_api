@@ -93,10 +93,10 @@ class PaymentsController {
              */
             transaction.transactionMessage = stkCallback.ResultDesc;
             transaction.status = 'Settled';
-            transaction.transactionDate = stkCallback.CallbackMetadata[2].Value;
-            transaction.amount = stkCallback.CallbackMetadata[0].Value;
-            transaction.transactionID = stkCallback.CallbackMetadata[1].Value;
-            transaction.phoneNumber = stkCallback.CallbackMetadata[3].Value;
+            transaction.transactionDate = stkCallback.CallbackMetadata.Item[2].Value;
+            transaction.amount = stkCallback.CallbackMetadata.Item[0].Value;
+            transaction.transactionID = stkCallback.CallbackMetadata.Item[1].Value;
+            transaction.phoneNumber = stkCallback.CallbackMetadata.Item[3].Value;
             const updatedTransaction = await transaction.save();
 
             const application = await Application.findOne({

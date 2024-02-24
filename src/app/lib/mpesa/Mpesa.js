@@ -20,10 +20,10 @@ class Mpesa {
                           grant_type: 'client_credentials',
                      },
             };
-            const response = await axios.request(configs)
+            const response = await axios.request(configs);
             return response.data.access_token;
         } catch (error) {
-            return error.message;
+            throw new Error(error.message);
         }
     }
     /**
@@ -40,20 +40,19 @@ class Mpesa {
             const token =  await this.getMpesaToken();
             const body = {
                 BusinessShortCode: mpesa.business_shortcode,
-                Password: this.password,
-                Timestamp: this.timeStamp,
+                Password: await this.password(),
+                Timestamp: await this.timeStamp(),
                 TransactionType: transaction.TransactionType,
-                Amount: transaction.Amount,
-                PartyA: this.formatPhoneNumber(transaction.phoneNumber),
+                Amount: `${transaction.Amount}`,
+                PartyA: await this.formatPhoneNumber(transaction.phoneNumber),
                 PartyB: mpesa.business_shortcode,
-                PhoneNumber: this.formatPhoneNumber(transaction.phoneNumber),
+                PhoneNumber: await this.formatPhoneNumber(transaction.phoneNumber),
                 CallBackURL: mpesa.mpesa_callback,
                 TransactionDesc: transaction.TransactionDesc
             };
             if (transaction.TransactionType !== 'CustomerBuyGoodsOnline') {
-                body.AccountReference = this.generateAccountNumber();
+                body.AccountReference = await this.generateAccountNumber();
             }
-            
             const response = await axios.request({
                 url: mpesa.express_api_url, 
                 headers: {
@@ -77,26 +76,26 @@ class Mpesa {
             }
             throw new Error(JSON.stringify(response.data));
         } catch (error) {
-            return error;
+            throw new Error( error);
         }
     }
     /**
  * Returns a base64 encoded string of the M-Pesa password
  * @returns {string} base64 encoded M-Pesa password
  */
-    async password() {
+    password = async () => {
         try {
-            const stringToEncode = mpesa.business_shortcode + mpesa.mpesa_passkey + this.timeStamp;
+            const stringToEncode = `${mpesa.business_shortcode}${mpesa.mpesa_passkey}${await this.timeStamp()}`;
             return new Buffer.from(stringToEncode).toString('base64');
         } catch (error) {
-            return error.message;
+            throw new Error (error.message);
         }
     }
     /**
  * Returns a timestamp in the format YYYYMMDDhhmmss
  * @returns {string} timestamp
  */
-    async timeStamp() {
+    timeStamp = async () => {
         try {
             const now = new Date();
             const year = now.getFullYear();
@@ -107,14 +106,14 @@ class Mpesa {
             const second = now.getSeconds() < 10 ? '0' + (now.getSeconds()) : now.getSeconds();
             return `${year}${month}${day}${hour}${minute}${second}`;
         } catch (error) {
-            return error.message;
+            throw new Error(error.message);
         }
     }
     /**
      * Generates a unique M-Pesa account number
      * @returns {string} the generated account number
      */
-    async generateAccountNumber() {
+    generateAccountNumber = async ()  =>{
         "use strict";
 
         try {
@@ -205,7 +204,7 @@ class Mpesa {
      * @param {string} prefix the current prefix of the account number
      * @returns {string} the incremented prefix
      */
-    incrementPrefix = (prefix) => {
+    incrementPrefix = async (prefix) => {
         const lastCharCode = prefix.charCodeAt(2) + 1;
         if (lastCharCode <= 122) {
             return prefix.slice(0, 2) + String.fromCharCode(lastCharCode);
@@ -224,7 +223,7 @@ class Mpesa {
  * @param {string} phoneNumber - The phone number to format.
  * @returns {string} The formatted phone number.
  */
-    formatPhoneNumber(phoneNumber) {
+    formatPhoneNumber = async (phoneNumber) => {
         const firstChar = phoneNumber.charAt(0);
         switch (firstChar) {
             case '0':

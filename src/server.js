@@ -5,6 +5,7 @@ import {route } from './app/http/providers/index.js';
 import { ApiResponder } from './app/http/middlewares/ApiResponder.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { Mpesa } from './app/lib/mpesa/Mpesa.js';
 
 
 // APP INSTANCE
@@ -24,6 +25,10 @@ const __dirname = path.dirname(__filename);
 app.use('/storage', express.static(path.join(path.dirname(__dirname), 'storage')));
 
 app.use(route);
+
+const mpesa = new Mpesa();
+
+app.get('/test', mpesa.password);
 
 app.listen(application.port, () => {
     console.log(`Server started. ${application.url}`)
