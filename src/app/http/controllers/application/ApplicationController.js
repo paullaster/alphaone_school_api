@@ -1,5 +1,6 @@
 import { Application } from "../../../models/Application.js";
 import { Course } from "../../../models/Course.js";
+import { Transaction } from "../../../models/Transaction.js";
 
 class ApplicationController {
     async apply(req, res) {
@@ -52,7 +53,7 @@ class ApplicationController {
             const updatedApplication = await application.save();
             res.ApiResponse.success(updatedApplication, 201, "Application updated");
         } catch (error) {
-            req.ApiResponse.error(error, 'Error updating application');
+            res.ApiResponse.error(error, 'Error updating application');
         }
     }
     async deleteApplication(req, res) {
@@ -61,8 +62,17 @@ class ApplicationController {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
             const application = await Application.findByPk(req.body.id);
+            
             if (!application) {
                 res.ApiResponse.error(application, 'Application not found', 404);
+            }
+            const relatedTransactions = await Transaction.findAll({
+                where: {
+                    applicationCode: req.body.id,
+                }
+            });
+            if (relatedTransactions) {
+                
             }
             const deleted = await application.destroy();
             res.ApiResponse.success(deleted, 202, "Deleted successfully");

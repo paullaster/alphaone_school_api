@@ -23,7 +23,7 @@ class Mpesa {
             const response = await axios.request(configs);
             return response.data.access_token;
         } catch (error) {
-            throw new Error(error.message);
+            throw new Error(error);
         }
     }
     /**
