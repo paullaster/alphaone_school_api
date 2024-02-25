@@ -6,6 +6,6 @@ applicationRoutes.get('/', ApplicationController.applications);
 applicationRoutes.get('/single', ApplicationController.application);
 applicationRoutes.post('/apply', ApplicationController.apply);
 applicationRoutes.put('/update', ApplicationController.update);
-applicationRoutes.delete('delete', ApplicationController.deleteApplication);
+applicationRoutes.delete('/delete', ApplicationController.deleteApplication);
 
 export {  applicationRoutes };

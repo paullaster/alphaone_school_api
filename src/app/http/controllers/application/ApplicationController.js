@@ -60,7 +60,7 @@ class ApplicationController {
             if (!req.body) {
                 res.ApiResponse.error(req.body, 'Missing body', 400);
             }
-            const application = await findByPk(req.body.id);
+            const application = await Application.findByPk(req.body.id);
             if (!application) {
                 res.ApiResponse.error(application, 'Application not found', 404);
             }
