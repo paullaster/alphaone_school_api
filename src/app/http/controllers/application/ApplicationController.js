@@ -9,18 +9,18 @@ class ApplicationController {
             }
             const applicationExists = await Application.findOne({ where: { course: req.body.course, applicant: req.body.applicant } });
             if (applicationExists) {
-                res.ApiResponse.error(applicationExists, "Application already exists!", 422);
+                return res.ApiResponse.error(applicationExists, "Application already exists!", 422);
             }
             const course = await Course.findOne({ where: { id: req.body.course } });
             if (!course) {
-                res.ApiResponse.error(course, 'We cannot find this course', 404);
+                return res.ApiResponse.error(course, 'We cannot find this course', 404);
             }
             req.body.balance = course.price;
             req.body.amount = course.price;
             const application = await Application.create(req.body);
-            res.ApiResponse.success(application, 201, 'Application made successfully');
+            return res.ApiResponse.success(application, 201, 'Application made successfully');
         } catch (error) {
-            res.ApiResponse.error(error, 'Error creating application');
+            return res.ApiResponse.error(error, 'Error creating application');
         }
     }
     async applications(req, res) {
