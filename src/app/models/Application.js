@@ -53,7 +53,7 @@ const Application = sequilize.define('Application', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    age: {
+    numberOfLessons: {
         type: DataTypes.INTEGER,
         allowNull: false,
     }
