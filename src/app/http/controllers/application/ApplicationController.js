@@ -72,7 +72,7 @@ class ApplicationController {
                 }
             });
             if (relatedTransactions) {
-                
+                //@TODO: handle related transactions
             }
             const deleted = await application.destroy();
             res.ApiResponse.success(deleted, 202, "Deleted successfully");
