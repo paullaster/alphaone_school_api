@@ -72,12 +72,13 @@ class ApplicationController {
     }
     async application(req, res) {
         try {
-            if (!req.body) {
-                res.ApiResponse.error(req.body, 'Missing body', 400);
+            if (!req.query) {
+                res.ApiResponse.error(req.query, 'Missing body', 400);
             }
+            const query = req.query;
             const app = await Application.findOne({
                 where: {
-                    id: req.body.applicationID,
+                    ...query,
                 },
             });
             if (!app) {
