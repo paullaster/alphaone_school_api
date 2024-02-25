@@ -73,7 +73,7 @@ class ApplicationController {
     async application(req, res) {
         try {
             if (!req.query) {
-                res.ApiResponse.error(req.query, 'Missing body', 400);
+                return res.ApiResponse.error(req.query, 'Missing query', 400);
             }
             const query = req.query;
             const app = await Application.findOne({
@@ -82,11 +82,11 @@ class ApplicationController {
                 },
             });
             if (!app) {
-                res.ApiResponse.error(app, 'We can not find this application', 404);
+                return res.ApiResponse.error(app, 'We can not find this application', 404);
             }
-            res.ApiResponse.success(app, 200);
+            return res.ApiResponse.success(app, 200);
         } catch (error) {
-            req.ApiResponse.error(error, 'We ran into an error while getting this application!');
+            return req.ApiResponse.error(error, 'We ran into an error while getting this application!');
         }
     }
 }
