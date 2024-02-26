@@ -71,7 +71,7 @@ class ApplicationController {
                     applicationCode: req.body.id,
                 }
             });
-            if (relatedTransactions) {
+            if (relatedTransactions && (relatedTransactions.status !== "Settled")) {
                 //@TODO: handle related transactions
             }
             const deleted = await application.destroy();
