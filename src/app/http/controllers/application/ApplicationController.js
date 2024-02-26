@@ -26,7 +26,8 @@ class ApplicationController {
     }
     async applications(req, res) {
         try {
-            const applications = await Application.findAndCountAll({});
+            const query = req['query'];
+            const applications = await Application.findAndCountAll({where: { ...query}});
             res.ApiResponse.success(applications, 200);
         } catch (error) {
             res.ApiResponse.error(error);
