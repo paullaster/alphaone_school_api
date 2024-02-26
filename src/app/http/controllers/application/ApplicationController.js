@@ -72,7 +72,7 @@ class ApplicationController {
                 }
             });
             if (relatedTransactions && (relatedTransactions.status !== "Settled")) {
-                //@TODO: handle related transactions
+                relatedTransactions.destroy();  
             }
             const deleted = await application.destroy();
             res.ApiResponse.success(deleted, 202, "Deleted successfully");
